@@ -1,3 +1,36 @@
 .ui.unstackable.items > .item > .image {
   width: 80px !important;
 }
+
+.custom-date {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: #f6f5ef;
+  border-radius: 7px;
+}
+.custom-date__year,
+.custom-date__month,
+.custom-date__day {
+  position: absolute;
+}
+.custom-date__month,
+.custom-date__day {
+  left: 0;
+  text-align: center;
+  width: 40px;
+}
+.custom-date__year {
+  bottom: 10px;
+  font-size: 1.3rem;
+  top: 10px;
+  right: -15px;
+  transform: rotate(270deg);
+}
+.custom-date__month {
+  top: 5px;
+}
+.custom-date__day {
+  bottom: 0;
+  font-size: 1.7rem;;
+}

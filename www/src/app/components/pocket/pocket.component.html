@@ -1,12 +1,29 @@
 <div class="ui link items unstackable">
-  <div class="item" *ngFor="let item of items">
+  <div class="item" *ngFor="let item of items | async">
     <div class="ui tiny image">
-      <img src="/assets/image.png">
+      <img src="/assets/image.png" *ngIf="!item.image">
+      <img src="{{item.image.src}}" *ngIf="item.image" />
     </div>
     <div class="content">
-      <div class="header">{{item.resolved_title}}</div>
+      <h3 class="ui header">
+        {{item.resolved_title}}
+      </h3>
+      <div class="ui right floated custom-date">
+        <div class="custom-date__year">
+          {{item.pretty_time_added | date:'yyyy'}}
+        </div>
+        <div class="custom-date__month">
+          {{item.pretty_time_added | date:'MMM'}}
+        </div>
+        <div class="custom-date__day">
+          {{item.pretty_time_added | date:'d'}}
+        </div>
+      </div>
       <div class="description">
         <p></p>
+      </div>
+      <div class="extra">
+        <div class="ui label" *ngFor="let tag of item.pretty_tags">{{tag.tag}}</div>
       </div>
     </div>
   </div>

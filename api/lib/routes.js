@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
 
 router.get('/pocket', function(req, res) {
   const limit = req.query.limit ? req.query.limit : 0;
-  
+
   pocket.get(limit).then((data) => {
     res.json(data);
   });

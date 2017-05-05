@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon lib/app.js --exec babel-node --presets es2015,stage-2",
+    "start": "nodemon --inspect -r dotenv/config lib/app.babel.js",
     "build": "babel lib -d dist",
     "serve": "node dist/app.js",
     "test": "mocha --compilers js:babel-register"
@@ -17,6 +17,7 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-2": "^6.24.1",
     "babel-register": "^6.18.0",
+    "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "request": "^2.81.0"
   }

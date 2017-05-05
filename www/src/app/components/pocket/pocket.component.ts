@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PocketService } from '../../services/pocket.service'
+import { PocketService } from '../../services/pocket.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-pocket',
@@ -8,16 +9,10 @@ import { PocketService } from '../../services/pocket.service'
   styleUrls: ['./pocket.component.css']
 })
 export class PocketComponent implements OnInit {
-  items = [];
+  items: Observable<Object[]>;
 
   constructor(private pocketService: PocketService) {
-    this.pocketService
-      .get()
-      .then(result => {
-        const items = Object.keys(result).map(item => result[item]);
-        console.log(items);
-        this.items = items;
-      });
+    this.items = this.pocketService.get();
   }
 
   ngOnInit() {
