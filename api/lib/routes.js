@@ -21,4 +21,11 @@ router.get('/pocket/all', function(req, res) {
   });
 });
 
+router.post('/pocket/archive', (req, res) => {
+  console.log(req);
+  // pocket.archive(req.params.id).then(() => {
+  //   res.json('ok');
+  // });
+});
+
 module.exports = router;

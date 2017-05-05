@@ -6,6 +6,7 @@ export default {
   consumer_key: process.env.POCKET_CONSUMER_KEY,
   access_token: process.env.POCKET_ACCESS_TOKEN,
   urls: {
-    get: 'https://getpocket.com/v3/get'
+    get: 'https://getpocket.com/v3/get',
+    send: 'https://getpocket.com/v3/send'
   }
 };

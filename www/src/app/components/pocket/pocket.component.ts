@@ -15,6 +15,10 @@ export class PocketComponent implements OnInit {
     this.items = this.pocketService.get();
   }
 
+  archive(id): void {
+    console.log(id);
+  }
+
   ngOnInit() {
   }
 

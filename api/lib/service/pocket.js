@@ -29,7 +29,7 @@ export default {
           console.log(err);
         }
 
-        if (res.statusCode !== 500) {
+        if (res && res.statusCode !== 500) {
           // Make the response into an array and add some info the objects
           var response = cleanResponse(JSON.parse(body).list);
 
@@ -37,10 +37,35 @@ export default {
           response.sort((a, b) => parseFloat(b.time_added) - parseFloat(a.time_added));
 
           resolve(response);
+        }
+      });
+    });
+  },
+
+  archive(id) {
+    return new Promise(resolve => {
+      let action = `[{"action":"archive","time":1348853312,"item_id":${id}}]`;
+      action = encodeURIComponent(action);
+      const body = `consumer_key=${config.consumer_key}&access_token=${config.access_token}&actions=${action}`;
+
+      const options = {
+        headers: config.headers,
+        url: config.urls.send,
+        body: body
+      };
+
+      request.post(options, (err, res, body) => {
+        if (err) {
+          console.log(err);
+        }
+
+        if (res.statusCode !== 500) {
+          resolve(body);
         } else {
           console.log('Error 500!');
         }
       });
+
     });
   }
 }

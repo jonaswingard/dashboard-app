@@ -1,4 +1,4 @@
-<div class="ui link items unstackable">
+<div class="ui items unstackable">
   <div class="item" *ngFor="let item of items | async">
     <div class="ui tiny image">
       <img src="/assets/image.png" *ngIf="!item.image">
@@ -24,6 +24,7 @@
       </div>
       <div class="extra">
         <div class="ui label" *ngFor="let tag of item.pretty_tags">{{tag.tag}}</div>
+        <button class="ui primary basic button" (click)="archive(item.item_id)">Archive</button>
       </div>
     </div>
   </div>
