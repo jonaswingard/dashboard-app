@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+
+import { IPocket } from './pocket';
 import { PocketService } from '../../services/pocket.service';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,17 +11,40 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./pocket.component.css']
 })
 export class PocketComponent implements OnInit {
-  items: Observable<Object[]>;
+  items: IPocket[];
 
-  constructor(private pocketService: PocketService) {
-    this.items = this.pocketService.get();
+  selected: {
+    addedTag?: string,
+    itemId: string
+  };
+
+  constructor(private pocketService: PocketService) { }
+
+  onArchive(id): void {
+    this.pocketService.archive(id).subscribe(items => this.items = items);
   }
 
-  archive(id): void {
-    console.log(id);
+  onSelect(item): void {
+    this.selected = {
+      itemId: item.item_id
+    };
+  }
+
+  onAddTag(): void {
+    this.pocketService.addTag(
+      this.selected.itemId,
+      this.selected.addedTag
+    ).subscribe(
+      items => {
+        this.items = items;
+        this.selected = null;
+      }
+    );
+
   }
 
   ngOnInit() {
+    this.pocketService.get().subscribe(items => this.items = items);
   }
 
 }

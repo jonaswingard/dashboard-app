@@ -34,3 +34,11 @@
   bottom: 0;
   font-size: 1.7rem;;
 }
+
+.loading-item {
+  opacity: 1;
+  transition: opacity 1s;
+}
+.loading-item--is-loading {
+  opacity: 0;
+}

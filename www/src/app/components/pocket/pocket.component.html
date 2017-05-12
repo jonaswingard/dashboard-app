@@ -1,30 +1,46 @@
-<div class="ui items unstackable">
-  <div class="item" *ngFor="let item of items | async">
-    <div class="ui tiny image">
-      <img src="/assets/image.png" *ngIf="!item.image">
-      <img src="{{item.image.src}}" *ngIf="item.image" />
-    </div>
-    <div class="content">
-      <h3 class="ui header">
-        {{item.resolved_title}}
-      </h3>
-      <div class="ui right floated custom-date">
-        <div class="custom-date__year">
-          {{item.pretty_time_added | date:'yyyy'}}
-        </div>
-        <div class="custom-date__month">
-          {{item.pretty_time_added | date:'MMM'}}
-        </div>
-        <div class="custom-date__day">
-          {{item.pretty_time_added | date:'d'}}
-        </div>
+<div *ngIf="selected">
+  <br>
+  <form class="ui right labeled left icon input" (ngSubmit)="onAddTag()" #tagForm="ngForm">
+    <i class="tags icon"></i>
+    <input type="text" placeholder="Enter tag..." [(ngModel)]="selected.addedTag" name="addedTag">
+    <button class="ui tag label">
+      Add Tag
+    </button>
+  </form>
+
+</div>
+
+<div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
+  <div class="ui items unstackable">
+    <div class="item" *ngFor="let item of items">
+      <div class="ui tiny image">
+        <img src="/assets/image.png" *ngIf="!item.image">
+        <img src="{{item.image.src}}" *ngIf="item.image" />
       </div>
-      <div class="description">
-        <p></p>
-      </div>
-      <div class="extra">
-        <div class="ui label" *ngFor="let tag of item.pretty_tags">{{tag.tag}}</div>
-        <button class="ui primary basic button" (click)="archive(item.item_id)">Archive</button>
+      <div class="content">
+        <h3 class="ui header">
+          {{item.resolved_title}}
+        </h3>
+        <div class="ui right floated custom-date">
+          <div class="custom-date__year">
+            {{item.pretty_time_added | date:'yyyy'}}
+          </div>
+          <div class="custom-date__month">
+            {{item.pretty_time_added | date:'MMM'}}
+          </div>
+          <div class="custom-date__day">
+            {{item.pretty_time_added | date:'d'}}
+          </div>
+        </div>
+        <div class="description">
+          <p></p>
+        </div>
+        <div class="extra">
+          <div class="ui label" *ngFor="let tag of item.pretty_tags">{{tag.tag}}</div>
+          <a class="ui primary basic button" [href]="item.given_url" target="_blank">Visit</a>
+          <button class="ui primary basic button" (click)="onArchive(item.item_id)">Archive</button>
+          <button class="ui primary basic button" (click)="onSelect(item)">Select</button>
+        </div>
       </div>
     </div>
   </div>

@@ -44,7 +44,8 @@ export default {
 
   archive(id) {
     return new Promise(resolve => {
-      let action = `[{"action":"archive","time":1348853312,"item_id":${id}}]`;
+      // let action = `[{"action":"archive","time":1348853312,"item_id":${id}}]`;
+      let action = `[{"action":"archive","item_id":${id}}]`;
       action = encodeURIComponent(action);
       const body = `consumer_key=${config.consumer_key}&access_token=${config.access_token}&actions=${action}`;
 

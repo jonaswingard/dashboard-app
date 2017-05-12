@@ -4,7 +4,7 @@ import pocket from './service/pocket';
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  res.json({ message: 'hooray! welcome to our api!' });
+  res.json({ message: 'Welcome to our api!' });
 });
 
 router.get('/pocket', function(req, res) {
@@ -22,10 +22,24 @@ router.get('/pocket/all', function(req, res) {
 });
 
 router.post('/pocket/archive', (req, res) => {
-  console.log(req);
-  // pocket.archive(req.params.id).then(() => {
-  //   res.json('ok');
-  // });
+  const limit = req.body.limit ? req.body.limit : 0;
+
+  pocket.archive(req.body.id).then(() => {
+    pocket.get(limit).then((data) => {
+      res.json(data);
+    });
+  });
+
+});
+
+router.post('/pocket/tag', (req, res) => {
+  const limit = req.body.limit ? req.body.limit : 0;
+  console.log(req.body.tag);
+  console.log(req.body.id);
+
+  pocket.get(limit).then((data) => {
+    res.json(data);
+  });
 });
 
 module.exports = router;
