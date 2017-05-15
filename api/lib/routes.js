@@ -34,12 +34,13 @@ router.post('/pocket/archive', (req, res) => {
 
 router.post('/pocket/tag', (req, res) => {
   const limit = req.body.limit ? req.body.limit : 0;
-  console.log(req.body.tag);
-  console.log(req.body.id);
 
-  pocket.get(limit).then((data) => {
-    res.json(data);
+  pocket.tag(req.body.id, req.body.tag).then(() => {
+    pocket.get(limit).then((data) => {
+      res.json(data);
+    });
   });
+
 });
 
 module.exports = router;
