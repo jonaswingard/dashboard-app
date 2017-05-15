@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IMenuItem } from './menu-item';
 
 @Component({
   selector: 'app-header',
@@ -6,16 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  items = [{
-    title: 'Foo',
-    path: '#/foo'
-  }, {
-    title: 'Bar',
-    path: '#/bar'
-  }];
+  private items: {
+    title: string;
+    path: string;
+  }[];
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.items = [{
+      title: 'Foo',
+      path: '#/foo'
+    }, {
+      title: 'Bar',
+      path: '#/bar'
+    }];
+  }
 
 }
