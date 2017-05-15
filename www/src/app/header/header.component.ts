@@ -14,11 +14,8 @@ export class HeaderComponent implements OnInit {
     path: '#/bar'
   }];
 
-  constructor() {
+  constructor() { }
 
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

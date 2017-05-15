@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { IPocket } from './pocket';
-import { PocketService } from '../../services/pocket.service';
-import { Observable } from 'rxjs/Observable';
+import { PocketService } from './pocket.service';
 
 @Component({
   selector: 'app-pocket',

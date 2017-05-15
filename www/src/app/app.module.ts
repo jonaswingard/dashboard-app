@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { PocketComponent } from './components/pocket/pocket.component';
+import { HeaderComponent } from './header/header.component';
+import { PocketComponent } from './pocket/pocket.component';
 
 @NgModule({
   declarations: [
