@@ -72,9 +72,10 @@ export default {
     });
   },
 
-  tag(id, tagName) {
+  tag(id, tagName, remove) {
     return new Promise((resolve, reject) => {
-      const action = encodeURIComponent(`[{"action":"tags_add","item_id":"${id}","tags":"${tagName}"}]`);
+      const actionName = !remove ? 'tags_add' : 'tags_remove';
+      const action = encodeURIComponent(`[{"action":"${actionName}","item_id":"${id}","tags":"${tagName}"}]`);
       const options = getOptions(config.urls.send, `&actions=${action}`);
 
       request.post(options, (err, res, body) => {

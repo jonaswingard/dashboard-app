@@ -14,6 +14,7 @@ import pocket from '../lib/service/pocket';
 
 describe.only('Pocket Service', () => {
   let itemId;
+  const tagName = 'test-tag';
 
   it('Get environment variables', () => {
     should.exist(process.env.POCKET_CONSUMER_KEY);
@@ -39,8 +40,13 @@ describe.only('Pocket Service', () => {
   });
 
   it('Add a tag to an item', () => {
-    const tag = 'test-tag';
-    const item = pocket.tag(itemId, tag);
+    const item = pocket.tag(itemId, tagName);
+
+    return expect(item).to.eventually.have.property('status', 1);
+  });
+
+  it('Remove a tag from an item', () => {
+    const item = pocket.tag(itemId, tagName, true);
 
     return expect(item).to.eventually.have.property('status', 1);
   });

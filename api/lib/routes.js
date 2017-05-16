@@ -32,10 +32,21 @@ router.post('/pocket/archive', (req, res) => {
 
 });
 
+router.post('/pocket/delete', (req, res) => {
+  const limit = req.body.limit ? req.body.limit : 0;
+
+  pocket.delete(req.body.id).then(() => {
+    pocket.get(limit).then((data) => {
+      res.json(data);
+    });
+  });
+
+});
+
 router.post('/pocket/tag', (req, res) => {
   const limit = req.body.limit ? req.body.limit : 0;
 
-  pocket.tag(req.body.id, req.body.tag).then(() => {
+  pocket.tag(req.body.id, req.body.tag, req.body.removeTag).then(() => {
     pocket.get(limit).then((data) => {
       res.json(data);
     });
