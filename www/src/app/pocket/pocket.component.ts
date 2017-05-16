@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { IPocket } from './pocket';
 import { PocketService } from './pocket.service';
 
+declare var jQuery: any;
+
 @Component({
   selector: 'app-pocket',
   providers: [ PocketService ],
@@ -15,22 +17,34 @@ export class PocketComponent implements OnInit {
 
   selected: {
     addedTag?: string,
-    itemId: string
+    itemId: string,
+    title: string
   };
 
   constructor(private pocketService: PocketService) { }
 
-  onArchive(id): void {
-    this.pocketService.archive(id).subscribe(items => this.items = items);
+  private toggleLoading = function (item) {
+    item.classList.toggle('loading');
+  };
+
+  onArchive(e, id): void {
+    this.toggleLoading(e.target);
+    this.pocketService.archive(id).subscribe(items => {
+      this.items = items;
+      this.toggleLoading(e.target);
+    });
   }
 
-  onSelect(item): void {
-    this.selected = {
-      itemId: item.item_id
-    };
+  onDelete(e, id): void {
+    this.toggleLoading(e.target);
+    this.pocketService.delete(id).subscribe(items => {
+      this.items = items;
+      this.toggleLoading(e.target);
+    });
   }
 
-  onAddTag(): void {
+  onAddTag(e, modal): void {
+    this.toggleLoading(e.target);
     this.pocketService.addTag(
       this.selected.itemId,
       this.selected.addedTag
@@ -38,9 +52,28 @@ export class PocketComponent implements OnInit {
       items => {
         this.items = items;
         this.selected = null;
+        this.toggleLoading(e.target);
+        modal.hide();
       }
     );
+  }
 
+  onRemoveTag(e, id, tagName): void {
+    e.target.parentElement.parentElement.classList.toggle('disabled');
+    this.pocketService.removeTag(id, tagName).subscribe(items => {
+        this.items = items;
+        e.target.parentElement.parentElement.classList.toggle('disabled');
+      }
+    );
+  }
+
+  onShowModal(item, dialog): void {
+    this.selected = {
+      itemId: item.item_id,
+      title: item.resolved_title
+    };
+
+    dialog.show();
   }
 
   ngOnInit() {

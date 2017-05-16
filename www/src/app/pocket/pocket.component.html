@@ -1,17 +1,19 @@
-<div *ngIf="selected">
-  <br>
-  <form class="ui right labeled left icon input" (ngSubmit)="onAddTag()" #tagForm="ngForm">
-    <i class="tags icon"></i>
-    <input type="text" placeholder="Enter tag..." [(ngModel)]="selected.addedTag" name="addedTag">
-    <button class="ui tag label">
-      Add Tag
-    </button>
-  </form>
-
-</div>
+<sm-modal title="Edit tags" class="small" #itemTagModal>
+  <modal-content>
+    <div *ngIf="selected" class="ui fluid icon input">
+      <i class="tags icon"></i>
+      <input type="text" placeholder="Add tag..." [(ngModel)]="selected.addedTag" name="addedTag">
+    </div>
+  </modal-content>
+  <modal-actions>
+    <div class="ui buttons">
+      <div class="ui button primary" (click)="onAddTag($event, itemTagModal)">Save</div>
+    </div>
+  </modal-actions>
+</sm-modal>
 
 <div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
-  <div class="ui items unstackable">
+  <div class="ui items unstackable divided">
     <div class="item" *ngFor="let item of items">
       <div class="ui tiny image">
         <img src="/assets/image.png" *ngIf="!item.image">
@@ -19,7 +21,10 @@
       </div>
       <div class="content">
         <h3 class="ui header">
-          {{item.resolved_title}}
+          <a class="ui black" [href]="item.given_url" target="_blank">
+            <span *ngIf="item.resolved_title">{{item.resolved_title}}</span>
+            <span *ngIf="!item.resolved_title">No title</span>
+          </a>
         </h3>
         <div class="ui right floated custom-date">
           <div class="custom-date__year">
@@ -36,10 +41,16 @@
           <p></p>
         </div>
         <div class="extra">
-          <div class="ui label" *ngFor="let tag of item.pretty_tags">{{tag.tag}}</div>
-          <a class="ui primary basic button" [href]="item.given_url" target="_blank">Visit</a>
-          <button class="ui primary basic button" (click)="onArchive(item.item_id)">Archive</button>
-          <button class="ui primary basic button" (click)="onSelect(item)">Select</button>
+          <div class="ui horizontal label" *ngFor="let tag of item.pretty_tags">
+            {{tag.tag}}
+            <button class="icon-button loading" (click)="onRemoveTag($event, item.item_id, tag.tag)">
+              <i class="delete icon"></i>
+            </button>
+          </div>
+          <br/>
+          <button class="ui primary basic button" (click)="onArchive($event, item.item_id)">Archive</button>
+          <button class="ui primary basic button" (click)="onDelete($event, item.item_id)">Delete</button>
+          <button class="ui button primary" (click)="onShowModal(item, itemTagModal)">Tag</button>
         </div>
       </div>
     </div>

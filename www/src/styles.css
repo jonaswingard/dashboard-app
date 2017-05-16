@@ -1,1 +1,29 @@
 @import url("assets/semantic/dist/semantic.css");
+
+.icon-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transition: color 0.16s;
+}
+.icon-button:not(:hover):not(:focus) {
+  color: rgba(0,0,0,0.3)
+}
+.icon-button .icon {
+  margin: 0 0 0 0.5em;
+  padding: 0;
+  width: auto;
+  height: auto;
+}
+
+/* Semantic UI modifications */
+a.ui.black {
+  color: rgba(0, 0, 0, 0.87);
+  transition: border 0.16s;
+  border-bottom: 1px solid transparent;
+}
+a.ui.black:hover,
+a.ui.black:focus {
+  color: rgba(0, 0, 0, 1);
+  border-bottom-color: rgba(0, 0, 0, 1);;
+}
