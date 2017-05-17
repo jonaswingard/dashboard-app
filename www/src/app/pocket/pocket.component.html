@@ -1,16 +1,26 @@
-<sm-modal title="Edit tags" class="small" #itemTagModal>
-  <modal-content>
-    <div *ngIf="selected" class="ui fluid icon input">
-      <i class="tags icon"></i>
-      <input type="text" placeholder="Add tag..." [(ngModel)]="selected.addedTag" name="addedTag">
+<lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
+  <div class="image content">
+    <div class="description">
+      <div class="ui header">Edit tags</div>
+      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated
+        with your registered e-mail address.</p>
+      <p>Is it okay to use this photo?</p>
+      <div *ngIf="selected" class="ui fluid icon input">
+        <i class="tags icon"></i>
+        <input type="text" placeholder="Add tag..." [(ngModel)]="selected.addedTag" name="addedTag">
+      </div>
     </div>
-  </modal-content>
-  <modal-actions>
-    <div class="ui buttons">
-      <div class="ui button primary" (click)="onAddTag($event, itemTagModal)">Save</div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button" (click)="showModal = false;">
+      Cancel
     </div>
-  </modal-actions>
-</sm-modal>
+    <div class="ui positive right labeled icon button" (click)="onAddTag($event, itemTagModal)">
+      Save
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</lsu-modal>
 
 <div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
   <div class="ui items unstackable divided">

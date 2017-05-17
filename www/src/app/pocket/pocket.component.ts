@@ -21,11 +21,15 @@ export class PocketComponent implements OnInit {
     title: string
   };
 
-  constructor(private pocketService: PocketService) { }
+  private modalOptions: any;
+
+  private showModal: boolean;
 
   private toggleLoading = function (item) {
     item.classList.toggle('loading');
   };
+
+  constructor(private pocketService: PocketService) { }
 
   onArchive(e, id): void {
     this.toggleLoading(e.target);
@@ -73,11 +77,15 @@ export class PocketComponent implements OnInit {
       title: item.resolved_title
     };
 
-    dialog.show();
+    this.showModal = true;
   }
 
   ngOnInit() {
     this.pocketService.get().subscribe(items => this.items = items);
+    this.modalOptions = {
+      size: 'small',
+      type: 'default',
+      closeable: true
+    };
   }
-
 }
