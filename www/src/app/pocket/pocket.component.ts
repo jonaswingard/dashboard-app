@@ -4,8 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { IPocket } from './pocket';
 import { PocketService } from './pocket.service';
 
-declare var jQuery: any;
-
 @Component({
   selector: 'app-pocket',
   providers: [ PocketService ],

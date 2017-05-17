@@ -8,12 +8,14 @@ import { L_SEMANTIC_UI_MODULE } from 'angular2-semantic-ui';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PocketComponent } from './pocket/pocket.component';
+import { DayInfoComponent } from './day-info/day-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PocketComponent
+    PocketComponent,
+    DayInfoComponent
   ],
   imports: [
     BrowserModule,

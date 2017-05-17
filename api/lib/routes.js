@@ -1,5 +1,7 @@
 import express from 'express';
+
 import pocket from './service/pocket';
+import dayInfo from '../lib/service/day-info';
 
 const router = express.Router();
 
@@ -52,6 +54,12 @@ router.post('/pocket/tag', (req, res) => {
     });
   });
 
+});
+
+router.get('/dayinfo', (req, res) => {
+  dayInfo.get().then((data) => {
+    res.json(data);
+  });
 });
 
 module.exports = router;

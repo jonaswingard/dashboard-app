@@ -1,26 +1,20 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const expect = chai.expect;
-const should = require('chai').should();
-const chaiAsPromised = require('chai-as-promised');
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
 
-chai.should();
-chai.use(chaiHttp);
 chai.use(chaiAsPromised);
+const { expect } = chai;
 
 require('dotenv').load();
 
 import pocket from '../lib/service/pocket';
 
-describe.only('Pocket Service', () => {
+describe('Pocket Service', () => {
   let itemId;
   const tagName = 'test-tag';
 
   it('Get environment variables', () => {
-    should.exist(process.env.POCKET_CONSUMER_KEY);
-    should.exist(process.env.POCKET_ACCESS_TOKEN);
-    process.env.POCKET_CONSUMER_KEY.should.be.a('string');
-    process.env.POCKET_ACCESS_TOKEN.should.be.a('string');
+    expect(process.env.POCKET_CONSUMER_KEY).to.be.a('string');
+    expect(process.env.POCKET_ACCESS_TOKEN).to.be.a('string');
   });
 
   it('Get 5 items', () => {
@@ -61,20 +55,4 @@ describe.only('Pocket Service', () => {
     const item = pocket.delete(itemId);
     return expect(item).to.eventually.have.property('status', 1);
   })
-});
-
-describe('API Tests', () => {
-  it('Should list 5 items on /pocket GET', done => {
-    const app = require('../lib/app');
-    chai.request(app)
-      .get('/api/pocket?limit=5')
-      .end(function(err, res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.be.a('array');
-        res.body[0].should.have.property('item_id');
-        res.body.should.have.lengthOf(5);
-        done();
-      });
-  });
 });

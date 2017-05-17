@@ -1,0 +1,16 @@
+<div *ngIf="dayInfo">
+  <div *ngIf="dayInfo.flagday">
+    <strong>Flaggdag:</strong> {{dayInfo.flagday}}
+  </div>
+
+  <div>
+    <strong>Vecka:</strong> {{dayInfo.weekNumber}}
+  </div>
+
+  <div>
+    <strong>Namnsdag:</strong>
+    <span *ngFor="let name of dayInfo.todaysNames; let isLast=last">
+      {{name}}{{isLast ? '' : ', '}}
+    </span>
+  </div>
+</div>
