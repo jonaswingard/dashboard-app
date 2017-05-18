@@ -1,12 +1,12 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
-chai.use(chaiAsPromised);
-const { expect } = chai;
+import pocket from '../lib/service/pocket';
 
 require('dotenv').load();
 
-import pocket from '../lib/service/pocket';
+chai.use(chaiAsPromised);
+const { expect } = chai;
 
 describe('Pocket Service', () => {
   let itemId;
@@ -23,7 +23,7 @@ describe('Pocket Service', () => {
   });
 
   it('Add new item', () => {
-    const url = 'http:\/\/pocket.co\/s8Kga';
+    const url = 'http://pocket.co/s8Kga';
     const item = pocket.add(url);
 
     return item.then((response) => {
@@ -54,5 +54,5 @@ describe('Pocket Service', () => {
   it('Delete an item', () => {
     const item = pocket.delete(itemId);
     return expect(item).to.eventually.have.property('status', 1);
-  })
+  });
 });

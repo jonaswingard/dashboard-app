@@ -5,11 +5,11 @@ import dayInfo from '../lib/service/day-info';
 
 const router = express.Router();
 
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   res.json({ message: 'Welcome to our api!' });
 });
 
-router.get('/pocket', function(req, res) {
+router.get('/pocket', (req, res) => {
   const limit = req.query.limit ? req.query.limit : 0;
 
   pocket.get(limit).then((data) => {
@@ -17,7 +17,7 @@ router.get('/pocket', function(req, res) {
   });
 });
 
-router.get('/pocket/all', function(req, res) {
+router.get('/pocket/all', (req, res) => {
   pocket.get().then((data) => {
     res.json(data);
   });
@@ -31,7 +31,6 @@ router.post('/pocket/archive', (req, res) => {
       res.json(data);
     });
   });
-
 });
 
 router.post('/pocket/delete', (req, res) => {
@@ -42,7 +41,6 @@ router.post('/pocket/delete', (req, res) => {
       res.json(data);
     });
   });
-
 });
 
 router.post('/pocket/tag', (req, res) => {
@@ -53,7 +51,6 @@ router.post('/pocket/tag', (req, res) => {
       res.json(data);
     });
   });
-
 });
 
 router.get('/dayinfo', (req, res) => {

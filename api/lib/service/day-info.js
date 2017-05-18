@@ -8,11 +8,10 @@ export default {
     const formattedDate = dateFormat(date, 'yyyy/mm/dd');
     const url = apiURL + formattedDate;
 
-    return new Promise(resolve => {
-
-      request(url, function (error, response, body) {
+    return new Promise((resolve) => {
+      request(url, (error, response, body) => {
         resolve(JSON.parse(body));
       });
     });
-  }
-}
+  },
+};

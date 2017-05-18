@@ -1,34 +1,30 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import app from '../lib/app';
 
-const { should } = chai;
+const { expect } = chai;
 
-chai.should();
 chai.use(chaiHttp);
 
 describe('API Tests', () => {
-  it('Should list 5 items on /pocket GET', done => {
-    const app = require('../lib/app');
+  it('Should list 5 items on /pocket GET', (done) => {
     chai.request(app)
       .get('/api/pocket?limit=5')
-      .end(function(err, res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.be.a('array');
-        res.body[0].should.have.property('item_id');
-        res.body.should.have.lengthOf(5);
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.have.property('item_id');
+        expect(res.body).to.have.lengthOf(5);
         done();
       });
   });
 
-  it('Should get a response from /dayinfo', done => {
-    const app = require('../lib/app');
+  it('Should get a response from /dayinfo', (done) => {
     chai.request(app)
       .get('/api/dayinfo')
-      .end(function(err, res) {
-        res.should.have.status(200);
-        res.should.be.json;
-        res.body.should.have.property('dagar');
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('dagar');
         done();
       });
   });

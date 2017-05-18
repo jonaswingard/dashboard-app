@@ -9,13 +9,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Custom API')
+  res.send('Custom API');
 });
 
 app.use('/api', routes);
 
 app.listen(PORT, () => {
-	console.log(`listening on ${PORT}`);
+  console.log(`listening on ${PORT}`);
 });
 
 module.exports = app;
