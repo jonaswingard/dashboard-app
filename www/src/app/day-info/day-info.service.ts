@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { IDayInfo } from './day-info';
+import { ErrorService } from '../error/error.service';
 
 @Injectable()
 export class DayInfoService {
@@ -17,7 +18,7 @@ export class DayInfoService {
     return this.http.get(this.apiUrl)
       .map(response => response.json().dagar[0])
       .map(data => {
-        return <IDayInfo>{
+        return <IDayInfo> {
           vacant: data['röd dag'],
           dayOfWeek: data['dag i vecka'],
           date: data['datum'],
@@ -28,11 +29,6 @@ export class DayInfoService {
           todaysNames: data['namnsdag']
         };
       })
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+      .catch(ErrorService.handleError);
   }
 }

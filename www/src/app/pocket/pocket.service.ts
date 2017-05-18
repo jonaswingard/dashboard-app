@@ -5,6 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 
+import { ErrorService } from '../error/error.service';
 import { IPocket } from './pocket';
 
 @Injectable()
@@ -14,43 +15,38 @@ export class PocketService {
   private itemLimit = 5;
 
   constructor(private http: Http) {
-    // this.itemsUrl = '/assets/pocket-items.json';
+    this.itemsUrl = '/assets/mock-data/pocket-items.json';
   }
 
   get(): Observable<IPocket[]> {
     return this.http.get(this.itemsUrl)
       .map(response => <IPocket[]>response.json())
-      .catch(this.handleError);
+      .catch(ErrorService.handleError);
   }
 
   archive(id): Observable<IPocket[]> {
     return this.http.post('/api/pocket/archive', { id, limit: this.itemLimit }, this.httpOptions)
       .map(response => <IPocket[]>response.json())
       .do(data => console.log(data))
-      .catch(this.handleError);
+      .catch(ErrorService.handleError);
   }
 
   delete(id): Observable<IPocket[]> {
     return this.http.post('/api/pocket/delete', { id, limit: this.itemLimit }, this.httpOptions)
       .map(response => <IPocket[]>response.json())
-      .catch(this.handleError);
+      .catch(ErrorService.handleError);
   }
 
   addTag(id, tag): Observable<IPocket[]> {
     return this.http.post('/api/pocket/tag', { id, tag, limit: this.itemLimit }, this.httpOptions)
       .map(response => <IPocket[]>response.json())
-      .catch(this.handleError);
+      .catch(ErrorService.handleError);
   }
 
   removeTag(id, tag): Observable<IPocket[]> {
     return this.http.post('/api/pocket/tag', { id, tag, removeTag: true, limit: this.itemLimit }, this.httpOptions)
       .map(response => <IPocket[]>response.json())
-      .catch(this.handleError);
-  }
-
-  private handleError(error: Response) {
-    console.error(error);
-    return Observable.throw(error.json().error || 'Server error');
+      .catch(ErrorService.handleError);
   }
 
 }
