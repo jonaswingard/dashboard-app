@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
-import dayInfo from '../lib/service/day-info';
+import dayInfo from '../lib/day-info/day-info.service';
 
 chai.use(chaiAsPromised);
 const { expect } = chai;

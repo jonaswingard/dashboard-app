@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
-import pocket from '../lib/service/pocket';
+import pocket from '../lib/pocket/pocket.service';
 
 require('dotenv').load();
 

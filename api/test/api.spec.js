@@ -6,7 +6,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('API Tests', () => {
+describe.only('API Tests', () => {
   it('Should list 5 items on /pocket GET', (done) => {
     chai.request(app)
       .get('/api/pocket?limit=5')

@@ -1,15 +1,9 @@
 import express from 'express';
-
-import pocket from './service/pocket';
-import dayInfo from '../lib/service/day-info';
+import pocket from './pocket.service';
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.json({ message: 'Welcome to our api!' });
-});
-
-router.get('/pocket', (req, res) => {
   const limit = req.query.limit ? req.query.limit : 0;
 
   pocket.get(limit).then((data) => {
@@ -17,13 +11,13 @@ router.get('/pocket', (req, res) => {
   });
 });
 
-router.get('/pocket/all', (req, res) => {
+router.get('/all', (req, res) => {
   pocket.get().then((data) => {
     res.json(data);
   });
 });
 
-router.post('/pocket/archive', (req, res) => {
+router.post('/archive', (req, res) => {
   const limit = req.body.limit ? req.body.limit : 0;
 
   pocket.archive(req.body.id).then(() => {
@@ -33,7 +27,7 @@ router.post('/pocket/archive', (req, res) => {
   });
 });
 
-router.post('/pocket/delete', (req, res) => {
+router.post('/delete', (req, res) => {
   const limit = req.body.limit ? req.body.limit : 0;
 
   pocket.delete(req.body.id).then(() => {
@@ -43,19 +37,13 @@ router.post('/pocket/delete', (req, res) => {
   });
 });
 
-router.post('/pocket/tag', (req, res) => {
+router.post('/tag', (req, res) => {
   const limit = req.body.limit ? req.body.limit : 0;
 
   pocket.tag(req.body.id, req.body.tag, req.body.removeTag).then(() => {
     pocket.get(limit).then((data) => {
       res.json(data);
     });
-  });
-});
-
-router.get('/dayinfo', (req, res) => {
-  dayInfo.get().then((data) => {
-    res.json(data);
   });
 });
 
