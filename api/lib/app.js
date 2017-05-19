@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import pocket from './pocket/pocket.component';
 import dayInfo from './day-info/day-info.component';
+import traffic from './traffic/traffic.component';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/dayinfo', dayInfo);
 app.use('/api/pocket', pocket);
+app.use('/api/traffic', traffic);
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

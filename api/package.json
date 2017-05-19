@@ -6,7 +6,7 @@
     "start": "nodemon --inspect -r dotenv/config lib/app.babel.js",
     "build": "babel lib -d dist",
     "serve": "node dist/app.js",
-    "test": "mocha -r dotenv/config --timeout=2000 --compilers js:babel-register"
+    "test": "mocha -r dotenv/config --compilers js:babel-register"
   },
   "keywords": [],
   "author": "Jonas Wingård <jonas.wingard@gmail.com>",
@@ -26,7 +26,8 @@
     "mocha": "^3.3.0",
     "request": "^2.81.0",
     "sinon": "^2.2.0",
-    "sinon-mongoose": "^2.0.1"
+    "sinon-mongoose": "^2.0.1",
+    "sl-api": "^1.0.3"
   },
   "devDependencies": {
     "chai-as-promised": "^6.0.0",

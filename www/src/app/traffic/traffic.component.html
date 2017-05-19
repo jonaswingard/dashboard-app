@@ -1,0 +1,32 @@
+<div class="ui card fluid">
+  <div class="content">
+    <h2>
+      <i class="train icon orange"></i> Trafikläget
+    </h2>
+  </div>
+  <div class="content">
+    <div *ngFor="let trafficType of traffic; let isLastType=last;">
+      <h3 class="ui header clickable" (click)="trafficType.isVisible = !trafficType.isVisible;">
+        <span>
+          <i class="{{trafficType.IconName}} icon"></i>
+          {{trafficType.Name}}
+        </span>
+        <i class="{{trafficType.StatusIcon}} icon ui right floated"></i>
+      </h3>
+      <div  *ngIf="trafficType.isVisible">
+        <div *ngFor="let event of trafficType.Events; let isLastEvent=last;">
+          <div *ngIf="event.TrafficLine">
+            <strong>Linje:</strong> {{event.TrafficLine}}
+          </div>
+          <div *ngIf="event.Planned">
+            <strong>Planerat:</strong> Ja
+          </div>
+          <p>{{event.Message}}</p>
+          <div *ngIf="!isLastEvent" class="ui divider"></div>
+        </div>
+      </div>
+      <div *ngIf="!isLastType" class="ui divider"></div>
+    </div>
+
+  </div>
+</div>

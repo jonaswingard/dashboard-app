@@ -6,7 +6,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe.only('API Tests', () => {
+describe('API Tests', () => {
   it('Should list 5 items on /pocket GET', (done) => {
     chai.request(app)
       .get('/api/pocket?limit=5')
@@ -25,6 +25,17 @@ describe.only('API Tests', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('dagar');
+        done();
+      });
+  });
+
+  it.only('Should get a response from /traffic/info', (done) => {
+    chai.request(app)
+      .get('/api/traffic/info')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.have.property('TrafficStatus');
         done();
       });
   });

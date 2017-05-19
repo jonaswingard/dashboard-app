@@ -1,3 +1,60 @@
+<div class="ui card fluid">
+  <div class="content">
+    <h2>
+      <img src="/assets/pocket-logo.png" height="21px">
+      Pocket
+    </h2>
+  </div>
+  <div class="content">
+
+    <div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
+      <div class="ui items unstackable divided">
+        <div class="item" *ngFor="let item of items">
+          <div class="ui tiny image">
+            <img src="/assets/image.png" *ngIf="!item.image">
+            <img src="{{item.image.src}}" *ngIf="item.image" />
+          </div>
+          <div class="content">
+            <h3 class="ui header">
+              <a class="ui black" [href]="item.given_url" target="_blank">
+                <span *ngIf="item.resolved_title">{{item.resolved_title}}</span>
+                <span *ngIf="!item.resolved_title">No title</span>
+              </a>
+            </h3>
+            <div class="ui right floated custom-date">
+              <div class="custom-date__year">
+                {{item.pretty_time_added | date:'yyyy'}}
+              </div>
+              <div class="custom-date__month">
+                {{item.pretty_time_added | date:'MMM'}}
+              </div>
+              <div class="custom-date__day">
+                {{item.pretty_time_added | date:'d'}}
+              </div>
+            </div>
+            <div class="description">
+              <p></p>
+            </div>
+            <div class="extra">
+              <div class="ui horizontal label" *ngFor="let tag of item.pretty_tags">
+                {{tag.tag}}
+                <button class="icon-button loading" (click)="onRemoveTag($event, item.item_id, tag.tag)">
+                  <i class="delete icon"></i>
+                </button>
+              </div>
+              <br/>
+              <button class="ui primary basic button" (click)="onArchive($event, item.item_id)">Archive</button>
+              <button class="ui primary basic button" (click)="onDelete($event, item.item_id)">Delete</button>
+              <button class="ui button primary" (click)="onShowModal(item, itemTagModal)">Tag</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
   <div class="image content">
     <div class="description">
@@ -21,48 +78,3 @@
     </div>
   </div>
 </lsu-modal>
-
-<div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
-  <div class="ui items unstackable divided">
-    <div class="item" *ngFor="let item of items">
-      <div class="ui tiny image">
-        <img src="/assets/image.png" *ngIf="!item.image">
-        <img src="{{item.image.src}}" *ngIf="item.image" />
-      </div>
-      <div class="content">
-        <h3 class="ui header">
-          <a class="ui black" [href]="item.given_url" target="_blank">
-            <span *ngIf="item.resolved_title">{{item.resolved_title}}</span>
-            <span *ngIf="!item.resolved_title">No title</span>
-          </a>
-        </h3>
-        <div class="ui right floated custom-date">
-          <div class="custom-date__year">
-            {{item.pretty_time_added | date:'yyyy'}}
-          </div>
-          <div class="custom-date__month">
-            {{item.pretty_time_added | date:'MMM'}}
-          </div>
-          <div class="custom-date__day">
-            {{item.pretty_time_added | date:'d'}}
-          </div>
-        </div>
-        <div class="description">
-          <p></p>
-        </div>
-        <div class="extra">
-          <div class="ui horizontal label" *ngFor="let tag of item.pretty_tags">
-            {{tag.tag}}
-            <button class="icon-button loading" (click)="onRemoveTag($event, item.item_id, tag.tag)">
-              <i class="delete icon"></i>
-            </button>
-          </div>
-          <br/>
-          <button class="ui primary basic button" (click)="onArchive($event, item.item_id)">Archive</button>
-          <button class="ui primary basic button" (click)="onDelete($event, item.item_id)">Delete</button>
-          <button class="ui button primary" (click)="onShowModal(item, itemTagModal)">Tag</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

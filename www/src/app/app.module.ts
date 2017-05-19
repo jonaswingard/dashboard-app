@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PocketComponent } from './pocket/pocket.component';
 import { DayInfoComponent } from './day-info/day-info.component';
+import { TrafficComponent } from './traffic/traffic.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PocketComponent,
-    DayInfoComponent
+    DayInfoComponent,
+    TrafficComponent
   ],
   imports: [
     BrowserModule,
