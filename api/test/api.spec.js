@@ -40,7 +40,7 @@ describe('API Tests', () => {
       });
   });
 
-  it.only('Should get a response from traffic location lookup', (done) => {
+  it('Should get a response from traffic location lookup', (done) => {
     chai.request(app)
       .post('/api/traffic/location')
       .send({ query: 'tegnergatan' })
@@ -48,6 +48,18 @@ describe('API Tests', () => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('array');
         expect(res.body).to.have.length.above(0);
+        done();
+      });
+  });
+
+  it.only('Should get a response from real time information', (done) => {
+    chai.request(app)
+      .post('/api/traffic/realtime')
+      .send({ siteid: '1550' })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.ResponseData.Buses).to.have.length.above(0);
         done();
       });
   });

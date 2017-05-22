@@ -1,15 +1,15 @@
 import SL from 'sl-api';
+import request from 'request';
+import config from '../config';
 
 const sl = new SL({
-  realtimeInformation: '3c711ccbaa084b278e1ac5a3ac0f7c61',
-  locationLookup: 'd6409a7178dc4c66a52feb76efa82e7e',
-  tripPlanner: '94ed4d7fb12149188018f0a0fa021946',
-  trafficSituation: '43dcdaaa365047818fe22f24acd4c8a1',
-  disturbanceInformation: 'ed814538dbd5426fa5d494df0a36a060',
+  realtimeInformation: config.SL.realtimeInformation,
+  locationLookup: config.SL.locationLookup,
+  tripPlanner: config.SL.tripPlanner,
+  trafficSituation: config.SL.trafficSituation,
+  disturbanceInformation: config.SL.disturbanceInformation,
 });
 
-// return sl.tripPlanner.trip({originId: 9118, destId: 9507});
-// return sl.locationLookup({searchstring: "tegnergatan"});
 // return sl.disturbanceInformation.deviations();
 
 export default {
@@ -18,5 +18,18 @@ export default {
   },
   getLocation(query) {
     return sl.locationLookup({ searchstring: query });
+  },
+  getRealTimeInformation(siteId, timeWindow) {
+    return new Promise((resolve) => {
+      const url = 'http://api.sl.se/api2/realtimedeparturesV4.json';
+      const parameters = `?key=${config.SL.realtimeInformation}&siteid=${siteId}&timewindow=${timeWindow}`;
+
+      return request.get({ url: `${url}${parameters}` }, (err, res, body) => {
+        resolve(JSON.parse(body));
+      });
+    });
+  },
+  getTrip(originId, destinationId) {
+    return sl.tripPlanner.trip({ originId, destId: destinationId });
   },
 };

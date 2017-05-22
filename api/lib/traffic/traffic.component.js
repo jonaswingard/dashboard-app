@@ -15,4 +15,10 @@ router.post('/location', (req, res) => {
   });
 });
 
+router.post('/realtime', (req, res) => {
+  traffic.getRealTimeInformation(req.body.siteid).then((data) => {
+    res.json(data);
+  });
+});
+
 module.exports = router;
