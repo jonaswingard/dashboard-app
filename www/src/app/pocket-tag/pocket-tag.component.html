@@ -1,0 +1,20 @@
+<lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
+  <div class="content">
+    <div class="description">
+      <div class="ui header">Redigera taggar</div>
+      <div class="ui fluid icon input">
+        <i class="tags icon"></i>
+        <input type="text" placeholder="Lägg till tagg..." [(ngModel)]="addedTag" #foobar>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button" (click)="showModal = false;">
+      Avbryt
+    </div>
+    <div class="ui positive right labeled icon button" (click)="onAddTag($event)">
+      Spara
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</lsu-modal>

@@ -1,80 +1,49 @@
 <div class="ui card fluid">
   <div class="content">
     <h2>
-      <img src="/assets/pocket-logo.png" height="21px">
+      <img src="/assets/pocket-logo.png" height="25px">
       Pocket
     </h2>
   </div>
   <div class="content">
-
     <div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">
-      <div class="ui items unstackable divided">
-        <div class="item" *ngFor="let item of items">
-          <div class="ui tiny image">
-            <img src="/assets/image.png" *ngIf="!item.image">
-            <img src="{{item.image.src}}" *ngIf="item.image" />
-          </div>
-          <div class="content">
-            <h3 class="ui header">
-              <a class="ui black" [href]="item.given_url" target="_blank">
-                <span *ngIf="item.resolved_title">{{item.resolved_title}}</span>
-                <span *ngIf="!item.resolved_title">No title</span>
-              </a>
-            </h3>
-            <div class="ui right floated custom-date">
-              <div class="custom-date__year">
-                {{item.pretty_time_added | date:'yyyy'}}
-              </div>
-              <div class="custom-date__month">
-                {{item.pretty_time_added | date:'MMM'}}
-              </div>
-              <div class="custom-date__day">
-                {{item.pretty_time_added | date:'d'}}
+      <div *ngFor="let item of items; let isLastItem=last;" class="pocket-item">
+        <div class="content">
+          <div class="item-header">
+            <div>
+              <h3 class="ui header small">
+                <a class="ui" [href]="item.given_url" target="_blank">
+                  <span *ngIf="item.resolved_title">{{item.resolved_title}}</span>
+                  <span *ngIf="!item.resolved_title">No title</span>
+                </a>
+              </h3>
+              <div class="extra">
+                <span class="item-hostname">{{item.hostname}}</span>
+                <div class="ui horizontal label" *ngFor="let tag of item.pretty_tags">
+                  {{tag.tag}}
+                  <button class="icon-button loading" (click)="onRemoveTag($event, item.item_id, tag.tag)">
+                    <i class="delete icon"></i>
+                  </button>
+                </div>
               </div>
             </div>
-            <div class="description">
-              <p></p>
-            </div>
-            <div class="extra">
-              <div class="ui horizontal label" *ngFor="let tag of item.pretty_tags">
-                {{tag.tag}}
-                <button class="icon-button loading" (click)="onRemoveTag($event, item.item_id, tag.tag)">
-                  <i class="delete icon"></i>
-                </button>
-              </div>
-              <br/>
-              <button class="ui primary basic button" (click)="onArchive($event, item.item_id)">Archive</button>
-              <button class="ui primary basic button" (click)="onDelete($event, item.item_id)">Delete</button>
-              <button class="ui button primary" (click)="onShowModal(item, itemTagModal)">Tag</button>
+            <div class="pocket-action">
+              <button class="ui icon basic green button" (click)="onArchive($event, item.item_id)" data-tooltip="Arkivera">
+                <i class="checkmark icon"></i>
+              </button>
+              <button class="ui icon basic teal button" (click)="onShowModal(item)" data-tooltip="Tagga">
+                <i class="tags icon"></i>
+              </button>
+              <button class="ui icon basic red button" (click)="onDelete($event, item.item_id)" data-tooltip="Ta bort">
+                <i class="remove icon"></i>
+              </button>
             </div>
           </div>
         </div>
+        <div *ngIf="!isLastItem" class="ui divider"></div>
       </div>
     </div>
-
   </div>
 </div>
 
-<lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
-  <div class="image content">
-    <div class="description">
-      <div class="ui header">Edit tags</div>
-      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated
-        with your registered e-mail address.</p>
-      <p>Is it okay to use this photo?</p>
-      <div *ngIf="selected" class="ui fluid icon input">
-        <i class="tags icon"></i>
-        <input type="text" placeholder="Add tag..." [(ngModel)]="selected.addedTag" name="addedTag">
-      </div>
-    </div>
-  </div>
-  <div class="actions">
-    <div class="ui black deny button" (click)="showModal = false;">
-      Cancel
-    </div>
-    <div class="ui positive right labeled icon button" (click)="onAddTag($event, itemTagModal)">
-      Save
-      <i class="checkmark icon"></i>
-    </div>
-  </div>
-</lsu-modal>
+<app-pocket-tag (onAddedTag)="onAddedTag($event)">></app-pocket-tag>

@@ -44,7 +44,6 @@ export class TrafficService {
         return data.map(item => {
           item.IconName = this.getTypeIcon(item.Type);
           item.StatusIcon = this.getStatusIcon(item);
-          console.log(item);
           return item;
         });
       })
