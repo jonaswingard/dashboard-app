@@ -12,4 +12,10 @@ describe('Traffic Service', () => {
       expect(response).to.be.an('array');
     }),
   );
+  it('Get information about a location', () =>
+    traffic.getLocation('tegnergatan').then((response) => {
+      expect(response).to.be.an('array');
+      expect(response).to.have.length.above(0);
+    }),
+  );
 });

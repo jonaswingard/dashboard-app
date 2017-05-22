@@ -8,11 +8,15 @@ const sl = new SL({
   disturbanceInformation: 'ed814538dbd5426fa5d494df0a36a060',
 });
 
+// return sl.tripPlanner.trip({originId: 9118, destId: 9507});
+// return sl.locationLookup({searchstring: "tegnergatan"});
+// return sl.disturbanceInformation.deviations();
+
 export default {
   getTrafficSituation() {
-    // return sl.tripPlanner.trip({originId: 9118, destId: 9507});
-    // return sl.locationLookup({searchstring: "tegnergatan"});
     return sl.trafficSituation();
-    // return sl.disturbanceInformation.deviations();
+  },
+  getLocation(query) {
+    return sl.locationLookup({ searchstring: query });
   },
 };

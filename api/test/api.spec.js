@@ -7,7 +7,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 describe('API Tests', () => {
-  it('Should list 5 items on /pocket GET', (done) => {
+  it('Should list 5 items on pocket', (done) => {
     chai.request(app)
       .get('/api/pocket?limit=5')
       .end((err, res) => {
@@ -19,7 +19,7 @@ describe('API Tests', () => {
       });
   });
 
-  it('Should get a response from /dayinfo', (done) => {
+  it('Should get a response from day info', (done) => {
     chai.request(app)
       .get('/api/dayinfo')
       .end((err, res) => {
@@ -29,13 +29,25 @@ describe('API Tests', () => {
       });
   });
 
-  it.only('Should get a response from /traffic/info', (done) => {
+  it('Should get a response from traffic info', (done) => {
     chai.request(app)
       .get('/api/traffic/info')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('array');
         expect(res.body[0]).to.have.property('TrafficStatus');
+        done();
+      });
+  });
+
+  it.only('Should get a response from traffic location lookup', (done) => {
+    chai.request(app)
+      .post('/api/traffic/location')
+      .send({ query: 'tegnergatan' })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.have.length.above(0);
         done();
       });
   });

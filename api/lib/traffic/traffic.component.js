@@ -9,4 +9,10 @@ router.get('/info', (req, res) => {
   });
 });
 
+router.post('/location', (req, res) => {
+  traffic.getLocation(req.body.query).then((data) => {
+    res.json(data);
+  });
+});
+
 module.exports = router;
