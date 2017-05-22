@@ -23,6 +23,7 @@ export class PocketTagComponent implements OnInit {
   };
 
   onShowModal() {
+    this.addedTag = '';
     this.showModal = true;
     setTimeout(_ => {
       this._renderer.invokeElementMethod(this.foobarRef.nativeElement, 'focus', []);

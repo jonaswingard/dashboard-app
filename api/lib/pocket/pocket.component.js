@@ -18,32 +18,20 @@ router.get('/all', (req, res) => {
 });
 
 router.post('/archive', (req, res) => {
-  const limit = req.body.limit ? req.body.limit : 0;
-
-  pocket.archive(req.body.id).then(() => {
-    pocket.get(limit).then((data) => {
-      res.json(data);
-    });
+  pocket.archive(req.body.id).then((data) => {
+    res.json(data);
   });
 });
 
 router.post('/delete', (req, res) => {
-  const limit = req.body.limit ? req.body.limit : 0;
-
-  pocket.delete(req.body.id).then(() => {
-    pocket.get(limit).then((data) => {
-      res.json(data);
-    });
+  pocket.delete(req.body.id).then((data) => {
+    res.json(data);
   });
 });
 
 router.post('/tag', (req, res) => {
-  const limit = req.body.limit ? req.body.limit : 0;
-
-  pocket.tag(req.body.id, req.body.tag, req.body.removeTag).then(() => {
-    pocket.get(limit).then((data) => {
-      res.json(data);
-    });
+  pocket.tag(req.body.id, req.body.tag, req.body.removeTag).then((data) => {
+    res.json(data);
   });
 });
 
