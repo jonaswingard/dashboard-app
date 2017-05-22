@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { PocketComponent } from './pocket/pocket.component';
 import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
 import { DayInfoComponent } from './day-info/day-info.component';
-import { TrafficComponent } from './traffic/traffic.component';
+import { TrafficStatusComponent } from './traffic-status/traffic-status.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { TrafficComponent } from './traffic/traffic.component';
     PocketComponent,
     PocketTagComponent,
     DayInfoComponent,
-    TrafficComponent
+    TrafficStatusComponent
   ],
   imports: [
     BrowserModule,

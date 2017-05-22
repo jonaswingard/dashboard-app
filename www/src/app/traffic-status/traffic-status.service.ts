@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ITraffic } from './traffic';
+import { ITrafficStatus } from './traffic-status';
 import { ErrorService } from '../error/error.service';
 
 @Injectable()
-export class TrafficService {
+export class TrafficStatusService {
   private httpOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
   private apiUrl = '/api/traffic/info';
 
@@ -37,7 +37,7 @@ export class TrafficService {
     return 'smile green';
   }
 
-  get(): Observable<ITraffic> {
+  get(): Observable<ITrafficStatus> {
     return this.http.get(this.apiUrl)
       .map(response => response.json())
       .map(data => {
