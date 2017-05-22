@@ -52,7 +52,7 @@ describe('API Tests', () => {
       });
   });
 
-  it.only('Should get a response from real time information', (done) => {
+  it('Should get a response from real time information', (done) => {
     chai.request(app)
       .post('/api/traffic/realtime')
       .send({ siteid: '1550' })

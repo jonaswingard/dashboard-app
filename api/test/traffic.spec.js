@@ -1,9 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-
 import traffic from '../lib/traffic/traffic.service';
-
-require('dotenv').load();
 
 chai.use(chaiAsPromised);
 const { expect } = chai;

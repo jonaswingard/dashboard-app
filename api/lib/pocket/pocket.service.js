@@ -5,13 +5,13 @@ function getOptions(url, additionalBody) {
   return {
     headers: config.headers,
     url,
-    body: `consumer_key=${config.consumer_key}&access_token=${config.access_token}${additionalBody}`,
+    body: `consumer_key=${config.pocket.consumer_key}&access_token=${config.pocket.access_token}${additionalBody}`,
   };
 }
 
 export default {
   get(limit) {
-    const options = getOptions(config.urls.get, `&count=${limit}&detailType=complete&sort=newest`);
+    const options = getOptions(config.pocket.urls.get, `&count=${limit}&detailType=complete&sort=newest`);
 
     function cleanResponse(data) {
       return Object.keys(data).map((item) => {
@@ -47,7 +47,7 @@ export default {
 
   add(url) {
     return new Promise((resolve) => {
-      const options = getOptions(config.urls.add, `&url=${url}`);
+      const options = getOptions(config.pocket.urls.add, `&url=${url}`);
 
       request.post(options, (err, res, body) => {
         resolve(JSON.parse(body));
@@ -58,7 +58,7 @@ export default {
   archive(id) {
     return new Promise((resolve) => {
       const action = encodeURIComponent(`[{"action":"archive","item_id":"${id}"}]`);
-      const options = getOptions(config.urls.send, `&actions=${action}`);
+      const options = getOptions(config.pocket.urls.send, `&actions=${action}`);
 
       request.post(options, (err, res, body) => {
         if (err) {
@@ -74,7 +74,7 @@ export default {
     return new Promise((resolve, reject) => {
       const actionName = !remove ? 'tags_add' : 'tags_remove';
       const action = encodeURIComponent(`[{"action":"${actionName}","item_id":"${id}","tags":"${tagName}"}]`);
-      const options = getOptions(config.urls.send, `&actions=${action}`);
+      const options = getOptions(config.pocket.urls.send, `&actions=${action}`);
 
       request.post(options, (err, res, body) => {
         if (err) {
@@ -90,7 +90,7 @@ export default {
   delete(id) {
     return new Promise((resolve) => {
       const action = encodeURIComponent(`[{"action":"delete","item_id":"${id}"}]`);
-      const options = getOptions(config.urls.send, `&actions=${action}`);
+      const options = getOptions(config.pocket.urls.send, `&actions=${action}`);
 
       request.post(options, (err, res, body) => {
         if (err) {
