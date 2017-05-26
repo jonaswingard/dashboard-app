@@ -55,7 +55,7 @@ describe('API Tests', () => {
   it('Should get a response from real time information', (done) => {
     chai.request(app)
       .post('/api/traffic/realtime')
-      .send({ siteid: '1550' })
+      .send({ siteid: '1550', timewindow: '5' })
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');

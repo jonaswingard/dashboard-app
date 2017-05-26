@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { DayInfoService } from './day-info.service';
 import { IDayInfo } from './day-info';
 

@@ -5,7 +5,7 @@
     </h2>
   </div>
   <div class="content">
-    <div *ngFor="let trafficType of traffic; let isLastType=last;">
+    <div *ngFor="let trafficType of trafficStatus; let isLastType=last;">
       <h3 class="ui header clickable" (click)="trafficType.isVisible = !trafficType.isVisible;">
         <span>
           <i class="{{trafficType.IconName}} icon"></i>

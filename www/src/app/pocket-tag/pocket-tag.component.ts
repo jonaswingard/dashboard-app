@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, Renderer } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-pocket-tag',
@@ -6,13 +6,13 @@ import { Component, OnInit, EventEmitter, Output, ViewChild, Renderer } from '@a
 })
 export class PocketTagComponent implements OnInit {
   @Output() onAddedTag = new EventEmitter<string>();
-  @ViewChild('foobar') foobarRef;
+  @ViewChild('addedTagRef') addedTagRef: ElementRef;
 
   modalOptions: any;
   showModal: boolean;
   addedTag: string;
 
-  constructor(private _renderer: Renderer) {}
+  constructor() {}
 
   ngOnInit() {
     this.modalOptions = {
@@ -25,9 +25,11 @@ export class PocketTagComponent implements OnInit {
   onShowModal() {
     this.addedTag = '';
     this.showModal = true;
-    setTimeout(_ => {
-      this._renderer.invokeElementMethod(this.foobarRef.nativeElement, 'focus', []);
-    });
+
+    setTimeout(() => {
+      this.addedTagRef.nativeElement.focus();
+    }, 100);
+
   };
 
   onAddTag(e): void {

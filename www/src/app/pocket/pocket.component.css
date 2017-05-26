@@ -15,6 +15,7 @@
   opacity: 0;
   transition: opacity .3s;
   margin-left: auto;
+  flex-shrink: 0;
 }
 
 .pocket-item:hover .pocket-action {

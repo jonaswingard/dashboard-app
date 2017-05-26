@@ -13,7 +13,7 @@ describe('Traffic Service', () => {
   );
 
   it('Get realtime information about a site', () =>
-    traffic.getRealTimeInformation('1550').then((response) => {
+    traffic.getRealTimeInformation(1550, 5).then((response) => {
       expect(response).to.be.an('object');
       expect(response.StatusCode).to.equal(0);
       expect(response.ResponseData.Buses).to.be.an('array');

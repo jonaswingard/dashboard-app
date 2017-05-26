@@ -16,7 +16,7 @@ router.post('/location', (req, res) => {
 });
 
 router.post('/realtime', (req, res) => {
-  traffic.getRealTimeInformation(req.body.siteid).then((data) => {
+  traffic.getRealTimeInformation(req.body.siteid, req.body.timewindow).then((data) => {
     res.json(data);
   });
 });

@@ -8,7 +8,7 @@ import { ITrafficStatus } from './traffic-status';
   templateUrl: './traffic-status.component.html'
 })
 export class TrafficStatusComponent implements OnInit {
-  private trafficStatus: ITrafficStatus;
+  trafficStatus: ITrafficStatus;
 
   constructor(private trafficStatusService: TrafficStatusService) { }
 
