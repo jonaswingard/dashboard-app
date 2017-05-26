@@ -6,95 +6,20 @@
 <div class="ui container">
 <div class="ui grid centered">
   <div class="eight wide column">
-    <ul>
-      <li *ngFor="let item of items">
-        <button (click)="onSelect(item)">{{item.Name}}</button>
-      </li>
-    </ul>
+    <div *ngFor="let item of items">
+      <button (click)="onSelect(item)" class="ui button basic">{{item.Name}}</button>
+    </div>
   </div>
   <div class="eight wide column" *ngIf="realtime">
     <div>
       <strong>LatestUpdate</strong>
       {{realtime.LatestUpdate | date: 'mediumTime'}}
     </div>
-    <div>
-      <strong>Metros</strong>
-      {{realtime.Metros}}
-    </div>
-    <div>
-      <strong>Buses</strong>
-      <div *ngFor="let departure of realtime.Buses">
-        <!-- <pre>
-          {{departure | json}}
-        </pre> -->
-
-        <button (click)="departure.isExpanded = !departure.isExpanded">
-          {{departure.LineNumber}}
-          {{departure.Destination}}
-          {{departure.DisplayTime}}
-        </button>
-
-
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-        <!-- Bygga komponent för avgångsinformation -->
-
-
-        <div *ngIf="departure.isExpanded">
-          <div>
-            <strong>GroupOfLine</strong>
-            {{departure.GroupOfLine}}
-          </div>
-          <div>
-            <strong>LineNumber</strong>
-            {{departure.LineNumber}}
-          </div>
-          <div>
-            <strong>TransportMode</strong>
-            {{departure.TransportMode}}
-          </div>
-          <div>
-            <strong>Destination</strong>
-            {{departure.Destination}}
-          </div>
-          <div>
-            <strong>JourneyDirection</strong>
-            {{departure.JourneyDirection}}
-          </div>
-          <div>
-            <strong>Avgångstid enligt tidtabell.</strong>
-            {{departure.TimeTabledDateTime}}
-          </div>
-          <div>
-            <strong>Förväntad avgångstid</strong>
-            {{departure.ExpectedDateTime}}
-          </div>
-          <div>
-            <strong>Avgångstid</strong>
-            {{departure.DisplayTime}}
-          </div>
-          <div>
-            <strong>Deviations</strong>: null
-            {{departure.Deviations}}
-          </div>
-        </div>
-        <div class="ui divider"></div>
-
-      </div>
-    </div>
-    <div>
-      <strong>Trains</strong>
-    </div>
-    <div>
-      <strong>Trams</strong>
-    </div>
-    <div>
-      <strong>Ships</strong>
-    </div>
+    <app-departure-info departureTitle="Tunnelbana" [items]="realtime.Metros"></app-departure-info>
+    <app-departure-info departureTitle="Buss" [items]="realtime.Buses"></app-departure-info>
+    <app-departure-info departureTitle="Tåg" [items]="realtime.Trains"></app-departure-info>
+    <app-departure-info departureTitle="Spårvagn" [items]="realtime.Trams"></app-departure-info>
+    <app-departure-info departureTitle="Båt" [items]="realtime.Ships"></app-departure-info>
     <div>
       <strong>StopPointDeviations</strong>
     </div>

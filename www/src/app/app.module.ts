@@ -12,6 +12,7 @@ import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
 import { DayInfoComponent } from './day-info/day-info.component';
 import { TrafficStatusComponent } from './traffic-status/traffic-status.component';
 import { MiscComponent } from './misc/misc.component';
+import { DepartureInfoComponent } from './misc/departure-info.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MiscComponent } from './misc/misc.component';
     PocketTagComponent,
     DayInfoComponent,
     TrafficStatusComponent,
-    MiscComponent
+    MiscComponent,
+    DepartureInfoComponent
   ],
   imports: [
     BrowserModule,
