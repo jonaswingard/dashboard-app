@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { IPocket } from './pocket';
@@ -13,9 +13,11 @@ import { PocketTagComponent } from '../pocket-tag/pocket-tag.component';
 })
 export class PocketComponent implements OnInit {
   @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
+  @Input() componentTitle: string;
+  @Input() limit: number = 5;
 
-  items: IPocket[];
-  selectedItem: IPocket;
+  private items: IPocket[];
+  private selectedItem: IPocket;
 
   constructor(private pocketService: PocketService) {}
 
@@ -25,39 +27,42 @@ export class PocketComponent implements OnInit {
 
   onArchive(e, id): void {
     this.toggleLoading(e.target);
-    this.pocketService.archive(id).subscribe(items => {
-      this.items = items;
-      this.toggleLoading(e.target);
-    });
+    this.pocketService.archive(id)
+      .flatMap(() => this.pocketService.get(this.limit))
+      .subscribe(items => {
+        this.items = items;
+        this.toggleLoading(e.target);
+      });
   }
 
   onDelete(e, id): void {
     this.toggleLoading(e.target);
-    this.pocketService.delete(id).subscribe(items => {
-      this.items = items;
-      this.toggleLoading(e.target);
-    });
+    this.pocketService.delete(id)
+      .flatMap(() => this.pocketService.get(this.limit))
+      .subscribe(items => {
+        this.items = items;
+        this.toggleLoading(e.target);
+      });
   }
 
   onRemoveTag(e, id, tagName): void {
     e.target.parentElement.parentElement.classList.toggle('disabled');
-    this.pocketService.removeTag(id, tagName).subscribe(items => {
+
+    this.pocketService.removeTag(id, tagName)
+      .flatMap(() => this.pocketService.get(this.limit))
+      .subscribe(items => {
         this.items = items;
         e.target.parentElement.parentElement.classList.toggle('disabled');
-      }
-    );
+      });
   }
 
   onAddedTag(tagName: string): void {
-    this.pocketService.addTag(
-      this.selectedItem.item_id,
-      tagName
-    ).subscribe(
-      items => {
+    this.pocketService.addTag(this.selectedItem.item_id, tagName)
+      .flatMap(() => this.pocketService.get(this.limit))
+      .subscribe(items => {
         this.items = items;
         this.selectedItem = null;
-      }
-    );
+      });
   }
 
   onShowModal(item): void {
@@ -66,6 +71,7 @@ export class PocketComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pocketService.get().subscribe(items => this.items = items);
+    this.pocketService.get(this.limit)
+      .subscribe(items => this.items = items);
   }
 }

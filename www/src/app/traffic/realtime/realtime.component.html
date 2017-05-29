@@ -1,8 +1,8 @@
 <div *ngIf="realtimeInfo">
   <h2>{{LocationTitle}}</h2>
   <div>
-    <strong>LatestUpdate</strong>
-    {{realtimeInfo.LatestUpdate | date: 'mediumTime'}}
+    <strong>Senast uppdaterat</strong>
+    {{realtimeInfo.LatestUpdate | date: 'HH:mm:ss'}}
   </div>
   <br>
   <traffic-departure-info departureTitle="Tunnelbana" [items]="realtimeInfo.Metros"></traffic-departure-info>

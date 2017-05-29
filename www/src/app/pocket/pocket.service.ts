@@ -12,14 +12,14 @@ import { IPocket } from './pocket';
 @Injectable()
 export class PocketService {
   private httpOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
-  private itemsUrl = '/api/pocket?limit=5';
+  private itemsUrl = '/api/pocket';
 
   constructor(private http: Http) {
     // this.itemsUrl = '/assets/mock-data/pocket-items.json';
   }
 
-  get(): Observable<IPocket[]> {
-    return this.http.get(this.itemsUrl)
+  get(limit: number): Observable<IPocket[]> {
+    return this.http.get(`${this.itemsUrl}?limit=${limit}`)
       .map(response => response.json())
       .do(data => {
         return data.map(item => {
@@ -32,25 +32,21 @@ export class PocketService {
 
   archive(id): Observable<IPocket[]> {
     return this.http.post('/api/pocket/archive', { id }, this.httpOptions)
-      .flatMap(() => this.get())
       .catch(ErrorService.handleError);
   }
 
   delete(id): Observable<IPocket[]> {
     return this.http.post('/api/pocket/delete', { id }, this.httpOptions)
-      .flatMap(() => this.get())
       .catch(ErrorService.handleError);
   }
 
   addTag(id, tag): Observable<IPocket[]> {
     return this.http.post('/api/pocket/tag', { id, tag }, this.httpOptions)
-      .flatMap(() => this.get())
       .catch(ErrorService.handleError);
   }
 
   removeTag(id, tag): Observable<IPocket[]> {
     return this.http.post('/api/pocket/tag', { id, tag, removeTag: true }, this.httpOptions)
-      .flatMap(() => this.get())
       .catch(ErrorService.handleError);
   }
 
