@@ -7,14 +7,14 @@ import 'rxjs/add/operator/catch';
 import { ErrorService } from '../error/error.service';
 
 @Injectable()
-export class MiscService {
+export class TrafficService {
   httpOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
   locationUrl = '/api/traffic/location';
   realtimeUrl = '/api/traffic/realtime';
 
   constructor(private http: Http) {}
 
-  get(query: string): Observable<[{}]> {
+  searchLocation(query: string): Observable<[{}]> {
     return this.http.post(this.locationUrl, { query }, this.httpOptions)
       .map(response => response.json())
       .catch(ErrorService.handleError);

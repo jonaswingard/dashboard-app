@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { ITrafficStatus } from './traffic-status';
-import { ErrorService } from '../error/error.service';
+import { ErrorService } from '../../error/error.service';
 
 @Injectable()
 export class TrafficStatusService {

@@ -1,0 +1,17 @@
+
+<form>
+  <input [(ngModel)]="query" placeholder="Sök station..." name="query">
+  <button (click)="onSearch()">Search</button>
+</form>
+<div class="ui container">
+  <div class="ui grid centered">
+    <div class="eight wide column">
+      <div *ngFor="let item of items">
+        <button (click)="onSelect(item)" class="ui button basic">{{item.Name}}</button>
+      </div>
+    </div>
+    <div class="eight wide column" *ngIf="selectedItem">
+      <pre>{{selectedItem | json}}</pre>
+    </div>
+  </div>
+</div>
