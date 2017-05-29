@@ -5,6 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './departure-info.component.html'
 })
 export class DepartureInfoComponent {
-  @Input() items: [{}];
+  @Input() items: any;
   @Input() departureTitle: string;
 }

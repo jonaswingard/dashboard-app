@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TrafficService } from '../traffic.service';
 
 @Component({
@@ -7,13 +7,13 @@ import { TrafficService } from '../traffic.service';
   templateUrl: './realtime.component.html'
 })
 export class RealtimeComponent implements OnInit {
-  siteId = '9206';
-  stopTitle = 'Östermalmstorg';
+  @Input() SiteId: string;
+  @Input() LocationTitle: string;
   realtimeInfo: any;
 
   constructor (private trafficService: TrafficService) {}
 
   ngOnInit() {
-    this.trafficService.getRealtime(this.siteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
+    this.trafficService.getRealtime(this.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
   }
 }
