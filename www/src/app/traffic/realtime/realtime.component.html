@@ -1,16 +1,24 @@
-<div *ngIf="realtimeInfo">
-  <h2>{{ComponentTitle}}</h2>
-  <div>
-    <strong>Senast uppdaterat</strong>
-    {{realtimeInfo.LatestUpdate | date: 'HH:mm:ss'}}
+<div class="ui card fluid">
+  <div class="content">
+    <h2>
+      {{ComponentTitle}}
+    </h2>
   </div>
-  <br>
-  <traffic-departure-info departureTitle="Tunnelbana" [items]="realtimeInfo.Metros"></traffic-departure-info>
-  <traffic-departure-info departureTitle="Buss" [items]="realtimeInfo.Buses"></traffic-departure-info>
-  <traffic-departure-info departureTitle="Tåg" [items]="realtimeInfo.Trains"></traffic-departure-info>
-  <traffic-departure-info departureTitle="Spårvagn" [items]="realtimeInfo.Trams"></traffic-departure-info>
-  <traffic-departure-info departureTitle="Båt" [items]="realtimeInfo.Ships"></traffic-departure-info>
-  <div>
-    <strong>StopPointDeviations</strong>
+  <div class="content">
+    <div *ngIf="realtimeInfo">
+      <div>
+        <strong>Senast uppdaterat</strong>
+        {{realtimeInfo.LatestUpdate | date: 'HH:mm:ss'}}
+      </div>
+      <br>
+      <traffic-departure-info departureTitle="Tunnelbana" [items]="realtimeInfo.Metros"></traffic-departure-info>
+      <traffic-departure-info departureTitle="Buss" [items]="realtimeInfo.Buses"></traffic-departure-info>
+      <traffic-departure-info departureTitle="Tåg" [items]="realtimeInfo.Trains"></traffic-departure-info>
+      <traffic-departure-info departureTitle="Spårvagn" [items]="realtimeInfo.Trams"></traffic-departure-info>
+      <traffic-departure-info departureTitle="Båt" [items]="realtimeInfo.Ships"></traffic-departure-info>
+      <div>
+        <strong>StopPointDeviations</strong>
+      </div>
+    </div>
   </div>
 </div>
