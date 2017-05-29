@@ -16,6 +16,19 @@
   height: auto;
 }
 
+.link-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #4183C4;
+}
+.link-button:hover,
+.link-button:focus {
+  color: #1e70bf
+}
+
+
+
 /* Semantic UI modifications */
 a.ui.black {
   color: rgba(0, 0, 0, 0.87);

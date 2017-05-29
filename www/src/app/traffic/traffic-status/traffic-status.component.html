@@ -13,7 +13,7 @@
         </span>
         <i class="{{trafficType.StatusIcon}} icon ui right floated"></i>
       </h3>
-      <div  *ngIf="trafficType.isVisible">
+      <div *ngIf="trafficType.isVisible">
         <div *ngFor="let event of trafficType.Events; let isLastEvent=last;">
           <div *ngIf="event.TrafficLine">
             <strong>Linje:</strong> {{event.TrafficLine}}

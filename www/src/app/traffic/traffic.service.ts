@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ErrorService } from '../app/error/error.service';
+import { ErrorService } from '../error/error.service';
 
 function getTypeIcon(type) {
   switch (type) {
