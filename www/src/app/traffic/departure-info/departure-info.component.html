@@ -1,37 +1,38 @@
-<div *ngIf="items.length">
-  <strong>{{departureTitle}}</strong>
-  <div *ngFor="let departure of items">
+<div>
+  <div *ngIf="items.length">
+    <div *ngFor="let departure of items">
+      <strong>{{departureTitle}}</strong>
+      <div>
+        {{departure.LineNumber}}
+        <button class="link-button" (click)="departure.isExpanded = !departure.isExpanded">
+          {{departure.Destination}}
+        </button>
+        ({{departure.DisplayTime}})
+      </div>
 
-    <div>
-      {{departure.LineNumber}}
-      <button class="link-button" (click)="departure.isExpanded = !departure.isExpanded">
-        {{departure.Destination}}
-      </button>
-      ({{departure.DisplayTime}})
+      <div *ngIf="departure.isExpanded">
+        <dl>
+          <dt>GroupOfLine</dt>
+          <dd>{{departure.GroupOfLine}}</dd>
+          <dt>LineNumber</dt>
+          <dd>{{departure.LineNumber}}</dd>
+          <dt>TransportMode</dt>
+          <dd>{{departure.TransportMode}}</dd>
+          <dt>Destination</dt>
+          <dd>{{departure.Destination}}</dd>
+          <dt>JourneyDirection</dt>
+          <dd>{{departure.JourneyDirection}}</dd>
+          <dt>Avgångstid enligt tidtabell.</dt>
+          <dd>{{departure.TimeTabledDateTime}}</dd>
+          <dt>Förväntad avgångstid</dt>
+          <dd>{{departure.ExpectedDateTime}}</dd>
+          <dt>Avgångstid</dt>
+          <dd>{{departure.DisplayTime}}</dd>
+          <dt>Deviations</dt>
+          <dd>{{departure.Deviations}}</dd>
+        </dl>
+      </div>
     </div>
-
-    <div *ngIf="departure.isExpanded">
-      <dl>
-        <dt>GroupOfLine</dt>
-        <dd>{{departure.GroupOfLine}}</dd>
-        <dt>LineNumber</dt>
-        <dd>{{departure.LineNumber}}</dd>
-        <dt>TransportMode</dt>
-        <dd>{{departure.TransportMode}}</dd>
-        <dt>Destination</dt>
-        <dd>{{departure.Destination}}</dd>
-        <dt>JourneyDirection</dt>
-        <dd>{{departure.JourneyDirection}}</dd>
-        <dt>Avgångstid enligt tidtabell.</dt>
-        <dd>{{departure.TimeTabledDateTime}}</dd>
-        <dt>Förväntad avgångstid</dt>
-        <dd>{{departure.ExpectedDateTime}}</dd>
-        <dt>Avgångstid</dt>
-        <dd>{{departure.DisplayTime}}</dd>
-        <dt>Deviations</dt>
-        <dd>{{departure.Deviations}}</dd>
-      </dl>
-    </div>
+    <div class="ui divider"></div>
   </div>
-  <div class="ui divider"></div>
 </div>

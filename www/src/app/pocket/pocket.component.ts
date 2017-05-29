@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { IPocket } from './pocket';
 import { PocketService } from './pocket.service';
-import { PocketTagComponent } from '../pocket-tag/pocket-tag.component';
+import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
 
 @Component({
   selector: 'app-pocket',
@@ -13,8 +13,8 @@ import { PocketTagComponent } from '../pocket-tag/pocket-tag.component';
 })
 export class PocketComponent implements OnInit {
   @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
-  @Input() componentTitle: string;
-  @Input() limit: number = 5;
+  @Input() ComponentTitle: string;
+  @Input() Limit: number = 5;
 
   private items: IPocket[];
   private selectedItem: IPocket;
@@ -28,7 +28,7 @@ export class PocketComponent implements OnInit {
   onArchive(e, id): void {
     this.toggleLoading(e.target);
     this.pocketService.archive(id)
-      .flatMap(() => this.pocketService.get(this.limit))
+      .flatMap(() => this.pocketService.get(this.Limit))
       .subscribe(items => {
         this.items = items;
         this.toggleLoading(e.target);
@@ -38,7 +38,7 @@ export class PocketComponent implements OnInit {
   onDelete(e, id): void {
     this.toggleLoading(e.target);
     this.pocketService.delete(id)
-      .flatMap(() => this.pocketService.get(this.limit))
+      .flatMap(() => this.pocketService.get(this.Limit))
       .subscribe(items => {
         this.items = items;
         this.toggleLoading(e.target);
@@ -49,7 +49,7 @@ export class PocketComponent implements OnInit {
     e.target.parentElement.parentElement.classList.toggle('disabled');
 
     this.pocketService.removeTag(id, tagName)
-      .flatMap(() => this.pocketService.get(this.limit))
+      .flatMap(() => this.pocketService.get(this.Limit))
       .subscribe(items => {
         this.items = items;
         e.target.parentElement.parentElement.classList.toggle('disabled');
@@ -58,7 +58,7 @@ export class PocketComponent implements OnInit {
 
   onAddedTag(tagName: string): void {
     this.pocketService.addTag(this.selectedItem.item_id, tagName)
-      .flatMap(() => this.pocketService.get(this.limit))
+      .flatMap(() => this.pocketService.get(this.Limit))
       .subscribe(items => {
         this.items = items;
         this.selectedItem = null;
@@ -71,7 +71,7 @@ export class PocketComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pocketService.get(this.limit)
+    this.pocketService.get(this.Limit)
       .subscribe(items => this.items = items);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DayInfoService } from './day-info.service';
 import { IDayInfo } from './day-info';
 
@@ -8,6 +8,7 @@ import { IDayInfo } from './day-info';
   templateUrl: './day-info.component.html'
 })
 export class DayInfoComponent implements OnInit {
+  @Input() ComponentTitle: string = 'Idag';
   private dayInfo: IDayInfo;
 
   constructor(private todaysNameService: DayInfoService) { }

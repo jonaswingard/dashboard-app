@@ -8,16 +8,18 @@ import { TrafficModule } from './traffic/traffic.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PocketComponent } from './pocket/pocket.component';
-import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
+import { PocketTagComponent } from './pocket/pocket-tag/pocket-tag.component';
 import { DayInfoComponent } from './day-info/day-info.component';
+import { UserWidgetsComponent } from './user-widgets/user-widgets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    PocketComponent,
     PocketTagComponent,
-    DayInfoComponent
+    UserWidgetsComponent,
+    DayInfoComponent,
+    PocketComponent
   ],
   imports: [
     BrowserModule,
@@ -25,6 +27,10 @@ import { DayInfoComponent } from './day-info/day-info.component';
     HttpModule,
     TrafficModule,
     L_SEMANTIC_UI_MODULE
+  ],
+  entryComponents: [
+    DayInfoComponent,
+    PocketComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

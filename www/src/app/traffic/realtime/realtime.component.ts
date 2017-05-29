@@ -7,8 +7,8 @@ import { TrafficService } from '../traffic.service';
   templateUrl: './realtime.component.html'
 })
 export class RealtimeComponent implements OnInit {
+  @Input() ComponentTitle: string;
   @Input() SiteId: string;
-  @Input() LocationTitle: string;
   realtimeInfo: any;
 
   constructor (private trafficService: TrafficService) {}

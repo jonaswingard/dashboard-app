@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input
+} from '@angular/core';
+
 import { TrafficService } from '../traffic.service';
 
 @Component({
@@ -7,6 +12,7 @@ import { TrafficService } from '../traffic.service';
   templateUrl: './traffic-status.component.html'
 })
 export class TrafficStatusComponent implements OnInit {
+  @Input() ComponentTitle: string = 'Trafikläget';
   trafficStatus: any;
 
   constructor(private trafficService: TrafficService) { }

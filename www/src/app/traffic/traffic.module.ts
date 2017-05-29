@@ -7,7 +7,6 @@ import { SearchLocationComponent } from './search-location/search-location.compo
 import { DepartureInfoComponent } from './departure-info/departure-info.component';
 import { RealtimeComponent } from './realtime/realtime.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -19,10 +18,9 @@ import { RealtimeComponent } from './realtime/realtime.component';
     DepartureInfoComponent,
     RealtimeComponent
   ],
-  exports: [
+  entryComponents: [
     TrafficStatusComponent,
     SearchLocationComponent,
-    DepartureInfoComponent,
     RealtimeComponent
   ]
 })
