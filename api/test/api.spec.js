@@ -29,6 +29,17 @@ describe('API Tests', () => {
       });
   });
 
+  it('Should get a response user widgets', (done) => {
+    chai.request(app)
+      .get('/api/user/widgets')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.have.property('componentName');
+        done();
+      });
+  });
+
   it('Should get a response from traffic info', (done) => {
     chai.request(app)
       .get('/api/traffic/info')
