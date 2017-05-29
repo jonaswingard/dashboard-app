@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TrafficService } from '../traffic.service';
 
 @Component({
-  selector: 'app-traffic-realtime',
+  selector: 'traffic-realtime',
   providers: [ TrafficService ],
-  templateUrl: './traffic-realtime.component.html'
+  templateUrl: './realtime.component.html'
 })
-export class TrafficRealtimeComponent implements OnInit {
+export class RealtimeComponent implements OnInit {
   siteId = '9206';
   stopTitle = 'Östermalmstorg';
   realtimeInfo: any;

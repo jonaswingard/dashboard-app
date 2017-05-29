@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TrafficService } from '../traffic.service';
 
 @Component({
-  selector: 'app-traffic-search-location',
+  selector: 'traffic-search-location',
   providers: [ TrafficService ],
-  templateUrl: './traffic-search-location.component.html'
+  templateUrl: './search-location.component.html'
 })
-export class TrafficSearchLocationComponent {
+export class SearchLocationComponent {
   items: any;
   query: string;
   selectedItem: any;

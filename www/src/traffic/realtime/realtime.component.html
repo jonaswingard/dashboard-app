@@ -1,0 +1,16 @@
+<div *ngIf="realtimeInfo">
+  <h2>{{stopTitle}}</h2>
+  <div>
+    <strong>LatestUpdate</strong>
+    {{realtimeInfo.LatestUpdate | date: 'mediumTime'}}
+  </div>
+  <br>
+  <traffic-departure-info departureTitle="Tunnelbana" [items]="realtimeInfo.Metros"></traffic-departure-info>
+  <traffic-departure-info departureTitle="Buss" [items]="realtimeInfo.Buses"></traffic-departure-info>
+  <traffic-departure-info departureTitle="Tåg" [items]="realtimeInfo.Trains"></traffic-departure-info>
+  <traffic-departure-info departureTitle="Spårvagn" [items]="realtimeInfo.Trams"></traffic-departure-info>
+  <traffic-departure-info departureTitle="Båt" [items]="realtimeInfo.Ships"></traffic-departure-info>
+  <div>
+    <strong>StopPointDeviations</strong>
+  </div>
+</div>
