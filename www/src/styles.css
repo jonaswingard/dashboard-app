@@ -45,3 +45,27 @@ a.ui.black:focus {
 .clickable {
   cursor: pointer;
 }
+
+/* Widget list */
+.widget-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  margin: -10px -10px 14px -10px;
+}
+.widget-item {
+  flex: 0 0 auto;
+  margin: 10px;
+}
+.widget-item--large {
+  width: calc(75% - 20px);
+}
+.widget-item--medium {
+  width: calc(50% - 20px);
+}
+.widget-item--small {
+  width: calc(25% - 20px);
+}
+.widget-item__header {
+  max-height: 58px;
+}

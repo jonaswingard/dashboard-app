@@ -1,5 +1,5 @@
 <div class="ui card fluid">
-  <div class="content">
+  <div class="content widget-item__header">
     <h2>
       <i class="search icon"></i>
       {{ComponentTitle}}
@@ -7,19 +7,17 @@
   </div>
   <div class="content">
     <form>
-      <input [(ngModel)]="query" placeholder="Sök station..." name="query">
-      <button (click)="onSearch()">Search</button>
+      <div class="ui input">
+        <input [(ngModel)]="query" placeholder="Sök station..." name="query">
+      </div>
+      <button class="ui button" (click)="onSearch()">Search</button>
     </form>
     <div class="ui container">
-      <div class="ui grid centered">
-        <div class="eight wide column">
-          <div *ngFor="let item of items">
-            <button (click)="onSelect(item)" class="ui button basic">{{item.Name}}</button>
-          </div>
-        </div>
-        <div class="eight wide column" *ngIf="selectedItem">
-          <pre>{{selectedItem | json}}</pre>
-        </div>
+      <div *ngFor="let item of items">
+        <button (click)="onSelect(item)" class="link-button">{{item.Name}}</button>
+      </div>
+      <div *ngIf="selectedItem">
+        <pre>{{selectedItem | json}}</pre>
       </div>
     </div>
   </div>

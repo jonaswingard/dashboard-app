@@ -1,7 +1,7 @@
 <div>
   <div *ngIf="items.length">
+    <strong>{{departureTitle}}</strong>
     <div *ngFor="let departure of items">
-      <strong>{{departureTitle}}</strong>
       <div>
         {{departure.LineNumber}}
         <button class="link-button" (click)="departure.isExpanded = !departure.isExpanded">
@@ -9,7 +9,6 @@
         </button>
         ({{departure.DisplayTime}})
       </div>
-
       <div *ngIf="departure.isExpanded">
         <dl>
           <dt>GroupOfLine</dt>

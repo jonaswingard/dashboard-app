@@ -1,0 +1,9 @@
+mongo admin -u admin -p oHw3PCkjyHHU --host <host> --port <port>
+mongo admin -u admin -p foobar123 --host <host> --port <port>
+
+db.createUser(
+{
+    user: "admin",
+    pwd: "foobar123",
+    roles: [ "root" ]
+})
