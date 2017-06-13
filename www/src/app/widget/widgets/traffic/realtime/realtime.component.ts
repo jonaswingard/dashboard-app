@@ -1,22 +1,23 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { TrafficService } from '../traffic.service';
+import { WidgetComponent } from '../../widget.component';
 
 @Component({
   selector: 'traffic-realtime',
   providers: [ TrafficService ],
   templateUrl: './realtime.component.html'
 })
-export class RealtimeComponent implements OnInit {
-  @Input() ComponentTitle: string;
-  @Input() SiteId: string;
+export class RealtimeComponent extends WidgetComponent implements OnInit {
   realtimeInfo: any;
-  private settings: any;
 
-  constructor (private trafficService: TrafficService) {}
+  constructor (private trafficService: TrafficService) {
+    super();
+  }
 
   ngOnInit() {
-    if (!this.settings.Hidden) {
-      this.trafficService.getRealtime(this.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
+    if (!this.settings.Hidden && this.settings.SiteId) {
+      this.trafficService.getRealtime(this.settings.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
     }
   }
 }

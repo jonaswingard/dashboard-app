@@ -2,22 +2,25 @@
   <div class="content widget-item__header">
     <h2>
       <i class="search icon"></i>
-      {{ComponentTitle}}
+      <span>{{settings.ComponentTitle}}</span>
     </h2>
+    <widget-edit (onSaveWidget)="onSaveWidget($event)" [Settings]="settings"></widget-edit>
   </div>
   <div class="content">
-    <form>
-      <div class="ui input">
-        <input [(ngModel)]="query" placeholder="Sök station..." name="query">
-      </div>
-      <button class="ui button" (click)="onSearch()">Search</button>
-    </form>
-    <div class="ui container">
-      <div *ngFor="let item of items">
-        <button (click)="onSelect(item)" class="link-button">{{item.Name}}</button>
-      </div>
-      <div *ngIf="selectedItem">
-        <pre>{{selectedItem | json}}</pre>
+    <div *ngIf="!settings.Hidden">
+      <form>
+        <div class="ui input">
+          <input [(ngModel)]="query" placeholder="Sök station..." name="query">
+        </div>
+        <button class="ui button" (click)="onSearch()">Search</button>
+      </form>
+      <div class="ui container">
+        <div *ngFor="let item of items">
+          <button (click)="onSelect(item)" class="link-button">{{item.Name}}</button>
+        </div>
+        <div *ngIf="selectedItem">
+          <pre>{{selectedItem | json}}</pre>
+        </div>
       </div>
     </div>
   </div>

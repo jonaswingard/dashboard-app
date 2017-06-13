@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { IPocket } from './pocket';
 import { PocketService } from './pocket.service';
 import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
+import { WidgetComponent } from '../widget.component';
 
 @Component({
   selector: 'app-pocket',
@@ -11,7 +12,7 @@ import { PocketTagComponent } from './pocket-tag/pocket-tag.component';
   templateUrl: './pocket.component.html',
   styleUrls: ['./pocket.component.css']
 })
-export class PocketComponent implements OnInit {
+export class PocketComponent extends WidgetComponent implements OnInit {
   @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
   @Input() ComponentTitle: string;
   @Input() Limit: number = 5;
@@ -19,7 +20,9 @@ export class PocketComponent implements OnInit {
   private items: IPocket[];
   private selectedItem: IPocket;
 
-  constructor(private pocketService: PocketService) {}
+  constructor(private pocketService: PocketService) {
+    super();
+  }
 
   toggleLoading(item) {
     item.classList.toggle('loading');
@@ -71,7 +74,9 @@ export class PocketComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pocketService.get(this.Limit)
-      .subscribe(items => this.items = items);
+    if (!this.settings.Hidden) {
+      this.pocketService.get(this.Limit)
+        .subscribe(items => this.items = items);
+    }
   }
 }

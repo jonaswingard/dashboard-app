@@ -1,8 +1,8 @@
 <div class="ui card fluid">
   <div class="content widget-item__header">
-    <h2 class="ui left floated">
+    <h2>
       <i class="calendar icon green"></i>
-      {{settings.ComponentTitle}}
+      <span>{{settings.ComponentTitle}}</span>
     </h2>
     <widget-edit (onSaveWidget)="onSaveWidget($event)" [Settings]="settings"></widget-edit>
   </div>

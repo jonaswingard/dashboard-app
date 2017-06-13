@@ -67,5 +67,27 @@ a.ui.black:focus {
   width: calc(25% - 20px);
 }
 .widget-item__header {
-  max-height: 58px;
+  display: flex;
+}
+.widget-item__header > h2 {
+  margin-bottom: 0;
+  display: flex;
+  overflow: hidden;
+
+}
+.widget-item__header > h2 > span {
+  margin-left: 0.1em;
+}
+.widget-item__header > widget-edit {
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.widget-item:hover .widget-item__header > widget-edit,
+.widget-item:focus .widget-item__header > widget-edit {
+  opacity: 1;
+}
+.pocket-logo {
+  height: 1em;
+  margin-top: 4px;
 }
