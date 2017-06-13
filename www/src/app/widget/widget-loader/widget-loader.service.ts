@@ -5,10 +5,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { ErrorService } from '../error/error.service';
+import { ErrorService } from '../../error/error.service';
 
 @Injectable()
-export class UserWidgetsService {
+export class WidgetLoaderService {
   private httpOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
   private apiUrl = '/api/user/widgets';
   private apiSaveWidgetUrl = '/api/user/widget/save';
@@ -35,13 +35,6 @@ export class UserWidgetsService {
 
   get $getSubject(): Observable<any> {
     return this.widgetsSubject.asObservable();
-  }
-
-  reloadWidgets(): void {
-    // this.widgetsSubject.next({});
-    // this.bSubject.subscribe((value) => {
-    //   console.log('Subscription got', value);
-    // });
   }
 
   saveWidget(item): Observable<any> {

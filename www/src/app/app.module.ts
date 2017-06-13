@@ -4,27 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { L_SEMANTIC_UI_MODULE } from 'angular2-semantic-ui';
 
+import { WidgetModule } from './widget/widget.module';
 import { TrafficModule } from './traffic/traffic.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PocketComponent } from './pocket/pocket.component';
 import { PocketTagComponent } from './pocket/pocket-tag/pocket-tag.component';
 import { DayInfoComponent } from './day-info/day-info.component';
-import { UserWidgetsComponent } from './user-widgets/user-widgets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PocketTagComponent,
-    UserWidgetsComponent,
     DayInfoComponent,
-    PocketComponent
+    PocketComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    WidgetModule,
     TrafficModule,
     L_SEMANTIC_UI_MODULE
   ],
@@ -35,4 +36,4 @@ import { UserWidgetsComponent } from './user-widgets/user-widgets.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

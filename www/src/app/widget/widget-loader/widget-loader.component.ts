@@ -6,19 +6,19 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import { UserWidgetsService } from './user-widgets.service';
-import { DayInfoComponent } from '../day-info/day-info.component';
-import { PocketComponent } from '../pocket/pocket.component';
-import { TrafficStatusComponent } from '../traffic/traffic-status/traffic-status.component';
-import { SearchLocationComponent } from '../traffic/search-location/search-location.component';
-import { RealtimeComponent } from '../traffic/realtime/realtime.component';
+import { WidgetLoaderService } from './widget-loader.service';
+import { DayInfoComponent } from '../../day-info/day-info.component';
+import { PocketComponent } from '../../pocket/pocket.component';
+import { TrafficStatusComponent } from '../../traffic/traffic-status/traffic-status.component';
+import { SearchLocationComponent } from '../../traffic/search-location/search-location.component';
+import { RealtimeComponent } from '../../traffic/realtime/realtime.component';
 
 @Component({
-  selector: 'app-user-widgets',
-  providers: [ UserWidgetsService ],
-  templateUrl: './user-widgets.component.html'
+  selector: 'widget-loader',
+  providers: [ WidgetLoaderService ],
+  templateUrl: './widget-loader.component.html'
 })
-export class UserWidgetsComponent implements OnInit {
+export class WidgetLoaderComponent implements OnInit {
   @ViewChild('componentContainer', { read: ViewContainerRef }) componentContainer;
   private widgetList = {
     DayInfoComponent,
@@ -31,11 +31,11 @@ export class UserWidgetsComponent implements OnInit {
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
-    private userWidgetsService: UserWidgetsService
+    private widgetLoaderService: WidgetLoaderService
   ) { }
 
   ngOnInit() {
-    this.userWidgetsService.$getSubject.subscribe(widgets => {
+    this.widgetLoaderService.$getSubject.subscribe(widgets => {
       if (widgets.widgetList) {
         for (const widget of widgets.widgetList) {
           this.addComponent(this.widgetList[widget.componentName], widget._id, widget.settings);
@@ -43,7 +43,7 @@ export class UserWidgetsComponent implements OnInit {
       }
     });
 
-    this.userWidgetsService.loadWidgets();
+    this.widgetLoaderService.loadWidgets();
   }
 
   private addComponent(component, id, props) {
@@ -56,8 +56,7 @@ export class UserWidgetsComponent implements OnInit {
 
     if (componentRef.instance.onSave) {
       componentRef.instance.onSave.subscribe(widget => {
-        this.userWidgetsService.saveWidget(widget).subscribe(() => {
-          console.log(widget);
+        this.widgetLoaderService.saveWidget(widget).subscribe(() => {
           componentRef.instance.settings = widget.settings;
         });
       });

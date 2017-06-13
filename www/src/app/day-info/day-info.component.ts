@@ -8,12 +8,10 @@ import {
 import { Subject } from 'rxjs/Subject';
 import { DayInfoService } from './day-info.service';
 import { IDayInfo } from './day-info';
-import { UserWidgetsService } from '../user-widgets/user-widgets.service';
-import { UserWidgetsComponent } from '../user-widgets/user-widgets.component';
 
 @Component({
   selector: 'app-day-info',
-  providers: [ DayInfoService, UserWidgetsService ],
+  providers: [ DayInfoService ],
   templateUrl: './day-info.component.html'
 })
 export class DayInfoComponent implements OnInit {
@@ -25,8 +23,7 @@ export class DayInfoComponent implements OnInit {
   private settings;
 
   constructor(
-    private todaysNameService: DayInfoService,
-    private userWidgetsService: UserWidgetsService
+    private todaysNameService: DayInfoService
   ) { }
 
   ngOnInit() {
