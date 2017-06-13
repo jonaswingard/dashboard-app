@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 
 import { WidgetLoaderService } from './widget-loader.service';
-import { DayInfoComponent } from '../../day-info/day-info.component';
-import { PocketComponent } from '../../pocket/pocket.component';
-import { TrafficStatusComponent } from '../../traffic/traffic-status/traffic-status.component';
-import { SearchLocationComponent } from '../../traffic/search-location/search-location.component';
-import { RealtimeComponent } from '../../traffic/realtime/realtime.component';
+import { DayInfoComponent } from '../widgets/day-info/day-info.component';
+import { PocketComponent } from '../widgets/pocket/pocket.component';
+import { TrafficStatusComponent } from '../widgets/traffic/traffic-status/traffic-status.component';
+import { SearchLocationComponent } from '../widgets/traffic/search-location/search-location.component';
+import { RealtimeComponent } from '../widgets/traffic/realtime/realtime.component';
 
 @Component({
   selector: 'widget-loader',

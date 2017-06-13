@@ -6,7 +6,7 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 
-import { ErrorService } from '../error/error.service';
+import { ErrorService } from '../../../error/error.service';
 import { IPocket } from './pocket';
 
 @Injectable()
