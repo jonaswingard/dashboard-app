@@ -2,18 +2,20 @@ import {
   Component,
   OnInit,
   EventEmitter,
+  Input,
   Output,
   ViewChild,
   ElementRef
 } from '@angular/core';
 
 @Component({
-  selector: 'app-pocket-tag',
-  templateUrl: './pocket-tag.component.html'
+  selector: 'widget-edit',
+  templateUrl: './widget-edit.component.html'
 })
-export class PocketTagComponent implements OnInit {
-  @Output() onAddedTag = new EventEmitter<string>();
-  @ViewChild('addedTagRef') addedTagRef: ElementRef;
+export class WidgetEditComponent implements OnInit {
+  @Input() Settings: any;
+  @Output() onSaveWidget = new EventEmitter<any>();
+  @ViewChild('setFocus') inputRef: ElementRef;
 
   modalOptions: any;
   showModal: boolean;
@@ -30,17 +32,16 @@ export class PocketTagComponent implements OnInit {
   };
 
   onShowModal() {
-    this.addedTag = '';
     this.showModal = true;
 
     setTimeout(() => {
-      this.addedTagRef.nativeElement.focus();
+      this.inputRef.nativeElement.focus();
     }, 100);
 
   };
 
-  onAddTag(e): void {
-    this.onAddedTag.emit(this.addedTag);
+  onSaveSettings(e): void {
+    this.onSaveWidget.emit(this.Settings);
     this.showModal = false;
   };
 }

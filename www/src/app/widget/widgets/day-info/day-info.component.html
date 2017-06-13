@@ -4,30 +4,9 @@
       <i class="calendar icon green"></i>
       {{settings.ComponentTitle}}
     </h2>
-    <button class="circular ui icon button right floated" (click)="onEditSettings(settings)">
-      <i class="icon settings"></i>
-    </button>
+    <widget-edit (onSaveWidget)="onSaveWidget($event)" [Settings]="settings"></widget-edit>
   </div>
   <div class="content">
-    <div *ngIf="selected">
-      <div class="ui form">
-        <h3 class="ui dividing header">Settings</h3>
-        <div class="field">
-          <div class="ui input">
-            <input [(ngModel)]="selected.ComponentTitle">
-          </div>
-        </div>
-        <div class="field">
-          <lsu-checkbox [(ngModel)]="selected.Hidden" [label]="'Dölj widget'" [type]="'checkbox'"></lsu-checkbox>
-        </div>
-        <button class="ui positive button" (click)="onSaveSettings()">
-          Spara
-        </button>
-        <button class="ui button" (click)="selected=null;">
-          Avbryt
-        </button>
-      </div>
-    </div>
     <div *ngIf="dayInfo && !settings.Hidden">
       <div *ngIf="dayInfo.flagday">
         <strong>Flaggdag:</strong> {{dayInfo.flagday}}

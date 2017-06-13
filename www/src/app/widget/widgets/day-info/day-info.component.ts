@@ -1,44 +1,27 @@
 import {
   Component,
   OnInit,
-  EventEmitter,
-  Input,
-  Output
+  Input
 } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { DayInfoService } from './day-info.service';
 import { IDayInfo } from './day-info';
+import { WidgetComponent } from '../widget.component';
 
 @Component({
   selector: 'app-day-info',
   providers: [ DayInfoService ],
   templateUrl: './day-info.component.html'
 })
-export class DayInfoComponent implements OnInit {
-  @Input() ComponentTitle: string = 'Idag';
-  onSave: Subject<any> = new Subject();
-
+export class DayInfoComponent extends WidgetComponent implements OnInit {
   private dayInfo: IDayInfo;
-  private selected;
-  private settings;
 
-  constructor(
-    private todaysNameService: DayInfoService
-  ) { }
+  constructor(private todaysNameService: DayInfoService) {
+    super();
+  }
 
   ngOnInit() {
     if (!this.settings.Hidden) {
       this.todaysNameService.get().subscribe(info => this.dayInfo = info);
     }
-  }
-
-  onEditSettings(settings) {
-    this.selected = { ...settings };
-  }
-
-  onSaveSettings() {
-    this.settings = this.selected;
-    this.onSave.next(this);
-    delete this.selected;
   }
 }

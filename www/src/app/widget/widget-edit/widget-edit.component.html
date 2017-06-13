@@ -1,0 +1,28 @@
+<button class="circular ui icon button right floated" (click)="onShowModal()" data-tooltip="Redigera inställningar">
+  <i class="icon settings"></i>
+</button>
+<lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
+  <div class="content">
+    <div class="description">
+      <div class="ui header">Redigera inställningar</div>
+      <div class="ui form">
+        <div class="field">
+          <div class="ui input">
+            <input [(ngModel)]="Settings.ComponentTitle" #setFocus>
+          </div>
+        </div>
+        <div class="field">
+          <lsu-checkbox [(ngModel)]="Settings.Hidden" [label]="'Dölj widget'" [type]="'checkbox'"></lsu-checkbox>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="ui positive right button" (click)="onSaveSettings($event)">
+      Spara
+    </button>
+    <button class="ui black deny button" (click)="showModal = false;">
+      Avbryt
+    </button>
+  </div>
+</lsu-modal>
