@@ -35,29 +35,39 @@ export class UserWidgetsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userWidgetsService.getWidgets().subscribe(widgets => {
-      for (const widget of widgets) {
-        this.addComponent(this.widgetList[widget.componentName], widget.settings);
+    this.userWidgetsService.$getSubject.subscribe(widgets => {
+      if (widgets.widgetList) {
+        for (const widget of widgets.widgetList) {
+          this.addComponent(this.widgetList[widget.componentName], widget._id, widget.settings);
+        }
       }
     });
+
+    this.userWidgetsService.loadWidgets();
   }
 
-  private addComponent(component, props) {
-    if (props.Hidden === true) {
-      return;
-    }
-
+  private addComponent(component, id, props) {
     const componentFactory = this.componentFactoryResolver
       .resolveComponentFactory(component);
     const componentRef = this.componentContainer.createComponent(componentFactory);
     componentRef.location.nativeElement.classList.add('widget-item');
+    componentRef.instance._id = id;
+    componentRef.instance.settings = {};
+
+    if (componentRef.instance.onSave) {
+      componentRef.instance.onSave.subscribe(widget => {
+        this.userWidgetsService.saveWidget(widget).subscribe(() => {
+          console.log(widget);
+          componentRef.instance.settings = widget.settings;
+        });
+      });
+    }
 
     Object.keys(props).forEach(function (key) {
       if (key === 'Size') {
         componentRef.location.nativeElement.classList.add(props[key]);
-      } else if (key !== 'Hidden') {
-        componentRef.instance[key] = props[key];
       }
+      componentRef.instance.settings[key] = props[key];
     });
 
     componentRef.changeDetectorRef.detectChanges();

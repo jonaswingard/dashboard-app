@@ -10,10 +10,13 @@ export class RealtimeComponent implements OnInit {
   @Input() ComponentTitle: string;
   @Input() SiteId: string;
   realtimeInfo: any;
+  private settings: any;
 
   constructor (private trafficService: TrafficService) {}
 
   ngOnInit() {
-    this.trafficService.getRealtime(this.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
+    if (!this.settings.Hidden) {
+      this.trafficService.getRealtime(this.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
+    }
   }
 }

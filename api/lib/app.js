@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 import pocket from './pocket/pocket.component';
 import dayInfo from './day-info/day-info.component';
@@ -22,7 +22,8 @@ app.use('/api/pocket', pocket);
 app.use('/api/traffic', traffic);
 app.use('/api/user', user);
 
-// mongoose.connect(process.env.MONGO_CONNECTION, { auth: { authdb: 'admin' } });
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_CONNECTION, { auth: { authdb: 'admin' } });
 
 app.listen(PORT, () => {
   console.log(`listening on ${PORT}`);

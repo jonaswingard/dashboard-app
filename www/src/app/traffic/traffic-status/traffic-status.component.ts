@@ -14,10 +14,13 @@ import { TrafficService } from '../traffic.service';
 export class TrafficStatusComponent implements OnInit {
   @Input() ComponentTitle: string = 'Trafikläget';
   trafficStatus: any;
+  settings: any;
 
   constructor(private trafficService: TrafficService) { }
 
   ngOnInit() {
-    this.trafficService.getInfo().subscribe(trafficStatus => this.trafficStatus = trafficStatus);
+    if (!this.settings.Hidden) {
+      this.trafficService.getInfo().subscribe(trafficStatus => this.trafficStatus = trafficStatus);
+    }
   }
 }

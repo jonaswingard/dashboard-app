@@ -14,7 +14,7 @@ export class DayInfoService {
 
   constructor(private http: Http) {}
 
-  get(): Observable<IDayInfo>  {
+  get(): Observable<IDayInfo> {
     return this.http.get(this.apiUrl)
       .map(response => response.json().dagar[0])
       .map(data => {
