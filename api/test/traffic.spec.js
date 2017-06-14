@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import traffic from '../lib/traffic/traffic.service';
+import traffic from '../src/traffic/traffic.service';
 
 chai.use(chaiAsPromised);
 const { expect } = chai;

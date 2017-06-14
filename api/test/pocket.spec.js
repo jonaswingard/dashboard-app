@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import pocket from '../lib/pocket/pocket.service';
+import pocket from '../src/pocket/pocket.service';
 
 chai.use(chaiAsPromised);
 const { expect } = chai;

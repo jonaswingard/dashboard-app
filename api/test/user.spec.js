@@ -1,12 +1,12 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 
-import user from '../lib/user/user.service';
+import user from '../src/user/user.service';
 
 chai.use(chaiAsPromised);
 const { expect } = chai;
 
-describe.only('Widgets and users', () => {
+describe('Widgets and users', () => {
   const deleteUser = true;
   const userName = 'testuser';
   const mockWidget1 = {

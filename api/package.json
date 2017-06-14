@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon --inspect -r dotenv/config lib/app.babel.js",
-    "build": "babel lib -d dist",
+    "start": "nodemon --inspect -r dotenv/config src/app.babel.js",
+    "build": "babel src -d dist",
     "serve": "node dist/app.js",
     "test": "mocha -r dotenv/config --compilers js:babel-register"
   },

@@ -1,12 +1,72 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../lib/app';
+import app from '../src/app';
 
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('API Tests', () => {
+describe.only('API Tests', () => {
+  const mockUserName = 'testuser1';
+
+  it('Should be able to add a new user', (done) => {
+    chai.request(app)
+      .post('/api/user/add')
+      .send({
+        username: mockUserName,
+        name: 'test user 1',
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('Should be able to add a new widget', (done) => {
+    const mockWidget1 = {
+      componentName: 'testwidget1',
+      settings: [{ ComponentTitle: 'testwidget title 1' }],
+    };
+
+    chai.request(app)
+      .post('/api/user/widget/add')
+      .send({
+        username: mockUserName,
+        widget: mockWidget1,
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
+  it('Should get a list of user widgets', (done) => {
+    chai.request(app)
+      .post('/api/user/widgets')
+      .send({
+        username: mockUserName,
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body.widgetList).to.be.an('array');
+        expect(res.body.widgetList).to.have.length.above(0);
+        expect(res.body.widgetList[0]).to.have.property('componentName');
+        done();
+      });
+  });
+
+  it('Should be able to delete newly added user', (done) => {
+    chai.request(app)
+      .post('/api/user/delete')
+      .send({
+        username: mockUserName,
+      })
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
   it('Should list 5 items on pocket', (done) => {
     chai.request(app)
       .get('/api/pocket?limit=5')
@@ -25,17 +85,6 @@ describe('API Tests', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('dagar');
-        done();
-      });
-  });
-
-  it('Should get a response user widgets', (done) => {
-    chai.request(app)
-      .get('/api/user/widgets')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('array');
-        expect(res.body[0]).to.have.property('componentName');
         done();
       });
   });
