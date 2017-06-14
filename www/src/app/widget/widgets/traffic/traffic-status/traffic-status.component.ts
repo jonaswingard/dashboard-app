@@ -13,7 +13,8 @@ import { WidgetComponent } from '../../widget.component';
   templateUrl: './traffic-status.component.html'
 })
 export class TrafficStatusComponent extends WidgetComponent implements OnInit {
-  trafficStatus: any;
+  public static WidgetTitle = 'Trafikstatus';
+  private trafficStatus: any;
 
   constructor(private trafficService: TrafficService) {
     super();

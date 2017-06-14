@@ -13,11 +13,11 @@ import { WidgetComponent } from '../widget.component';
   styleUrls: ['./pocket.component.css']
 })
 export class PocketComponent extends WidgetComponent implements OnInit {
-  @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
+  public static WidgetTitle = 'Pocketlista';
   private Limit: number = 5;
-
   private items: IPocket[];
   private selectedItem: IPocket;
+  @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
 
   constructor(private pocketService: PocketService) {
     super();

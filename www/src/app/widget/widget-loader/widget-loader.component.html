@@ -1,3 +1,20 @@
+<div>
+  <button class="ui positive icon button" data-tooltip="Lägg till ny widget">
+    <i class="icon plus big"></i>
+  </button>
+</div>
+<div class="ui six cards">
+  <div *ngFor="let widget of availableWidgets;" class="card">
+    <div class="content">
+      <div class="header">{{widget.title}}</div>
+    </div>
+    <button class="ui bottom attached button" (click)="onAddWidget(widget)">
+      <i class="add icon"></i>
+      Lägg till
+    </button>
+  </div>
+</div>
+<br>
 <div class="widget-list">
   <div #componentContainer></div>
 </div>

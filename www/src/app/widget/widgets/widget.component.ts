@@ -9,9 +9,9 @@ import { Subject } from 'rxjs/Subject';
   selector: 'widget'
 })
 export class WidgetComponent {
-  onSave: Subject<any> = new Subject();
-
+  public static WidgetTitle = 'Widget';
   public settings;
+  private onSave: Subject<any> = new Subject();
 
   constructor() {}
 

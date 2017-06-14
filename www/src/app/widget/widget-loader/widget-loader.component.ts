@@ -20,30 +20,41 @@ import { RealtimeComponent } from '../widgets/traffic/realtime/realtime.componen
 })
 export class WidgetLoaderComponent implements OnInit {
   @ViewChild('componentContainer', { read: ViewContainerRef }) componentContainer;
-  private widgetList = {
+  private widgetCollection = {
     DayInfoComponent,
     PocketComponent,
     TrafficStatusComponent,
     SearchLocationComponent,
     RealtimeComponent
   };
+  private availableWidgets = [];
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
     private widgetLoaderService: WidgetLoaderService
-  ) { }
+  ) {}
 
   ngOnInit() {
+    Object.keys(this.widgetCollection).forEach((key) => {
+      this.availableWidgets.push({
+        title: this.widgetCollection[key].WidgetTitle
+      });
+    });
+
     this.widgetLoaderService.$getSubject.subscribe(widgets => {
       if (widgets.widgetList) {
         for (const widget of widgets.widgetList) {
-          this.addComponent(this.widgetList[widget.componentName], widget._id, widget.settings);
+          this.addComponent(this.widgetCollection[widget.componentName], widget._id, widget.settings);
         }
       }
     });
 
     this.widgetLoaderService.loadWidgets();
+  }
+
+  onAddWidget(widget) {
+    console.log(widget);
   }
 
   private getSetting(settings: any, key: string): string {

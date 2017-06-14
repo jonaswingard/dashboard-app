@@ -13,6 +13,7 @@ import { WidgetComponent } from '../widget.component';
   templateUrl: './day-info.component.html'
 })
 export class DayInfoComponent extends WidgetComponent implements OnInit {
+  public static WidgetTitle = 'Dagens info';
   private dayInfo: IDayInfo;
   private componentTitle: string;
 

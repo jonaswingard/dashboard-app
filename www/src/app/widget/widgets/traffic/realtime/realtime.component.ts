@@ -9,7 +9,8 @@ import { WidgetComponent } from '../../widget.component';
   templateUrl: './realtime.component.html'
 })
 export class RealtimeComponent extends WidgetComponent implements OnInit {
-  realtimeInfo: any;
+  public static WidgetTitle = 'Avgångsinfo';
+  private realtimeInfo: any;
 
   constructor (private trafficService: TrafficService) {
     super();

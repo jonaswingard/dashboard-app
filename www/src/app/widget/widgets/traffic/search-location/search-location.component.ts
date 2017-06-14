@@ -13,10 +13,11 @@ import { WidgetComponent } from '../../widget.component';
   templateUrl: './search-location.component.html'
 })
 export class SearchLocationComponent extends WidgetComponent {
+  public static WidgetTitle = 'Sök hållplats';
+  private items: any;
+  private query: string;
+  private selectedItem: any;
   @Input() ComponentTitle: string = 'Sök hållplats';
-  items: any;
-  query: string;
-  selectedItem: any;
 
   constructor(private trafficService: TrafficService) {
     super();

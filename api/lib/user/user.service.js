@@ -7,33 +7,54 @@ function moveItem(array, from, to) {
 
 export default {
   add(username, name) {
-    return new User({ username, name }).save();
+    return new Promise((resolve, reject) =>
+      new User({ username, name }).save((error, data) => {
+        if (error) {
+          reject(error);
+        } else {
+          this.addUserWidgetItem(data._id).then(() => resolve(data));
+        }
+      }),
+    );
   },
 
   delete(username) {
-    return User.deleteOne({ username });
+    return new Promise((resolve, reject) => {
+      this.getUser(username).then((user) => {
+        this.deleteUserWidgetItem(user._id).then(() => {
+          User.deleteOne({ username }, (userError, writeOpResult) => {
+            if (userError) {
+              reject(userError);
+            }
+            resolve(writeOpResult);
+          });
+        });
+      });
+    });
   },
 
   getUser(username) {
     return User.findOne({ username });
   },
 
-  addUserWidgets(username, widgetList) {
+  addUserWidgetItem(userId) {
     return new Promise((resolve) => {
-      User.findOne({ username }).then((user) => {
-        const widgetItem = new UserWidget({
-          user,
-          widgetList,
-        });
+      const widgetItem = new UserWidget({
+        user: userId,
+        widgetList: [],
+      });
 
-        widgetItem.save().then((item) => {
-          resolve(item);
-        });
+      widgetItem.save().then((item) => {
+        resolve(item);
       });
     });
   },
 
-  getUserWidgets(username) {
+  deleteUserWidgetItem(userId) {
+    return UserWidget.deleteOne({ user: userId });
+  },
+
+  getUserWidgetItem(username) {
     return new Promise((resolve) => {
       User.findOne({ username }).then((user) => {
         resolve(UserWidget.findOne({ user: user._id }));
@@ -41,11 +62,31 @@ export default {
     });
   },
 
-  getUserWidget(username, index) {
+  getUserWidgetById(widgetId) {
+    return new Promise((resolve) => {
+      UserWidget.findOne({ 'widgetList._id': widgetId }).then((item) => {
+        resolve(item.widgetList.filter(
+          widgetItem => widgetItem._id.toString() === widgetId.toString())[0]);
+      });
+    });
+  },
+
+  getUserWidgetByIndex(username, index) {
     return new Promise((resolve) => {
       User.findOne({ username }).then((user) => {
         UserWidget.findOne({ user: user._id }).then((userWidget) => {
           resolve(userWidget.widgetList[index]);
+        });
+      });
+    });
+  },
+
+  addUserWidget(username, widget) {
+    return new Promise((resolve) => {
+      this.getUserWidgetItem(username).then((userWidgetItem) => {
+        userWidgetItem.widgetList.push(widget);
+        userWidgetItem.save().then(() => {
+          resolve(userWidgetItem);
         });
       });
     });
@@ -66,14 +107,6 @@ export default {
             resolve(doc);
           },
         );
-      });
-    });
-  },
-
-  getUserWidgetById(widgetId) {
-    return new Promise((resolve) => {
-      UserWidget.findOne({ 'widgetList._id': widgetId }).then((item) => {
-        resolve(item.widgetList.filter(widgetItem => widgetItem._id.toString() === widgetId)[0]);
       });
     });
   },

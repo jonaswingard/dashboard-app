@@ -6,62 +6,100 @@ import user from '../lib/user/user.service';
 chai.use(chaiAsPromised);
 const { expect } = chai;
 
-describe.only('Widgets', () => {
-  const userName = 'foobar';
+describe.only('Widgets and users', () => {
+  const deleteUser = true;
+  const userName = 'testuser';
+  const mockWidget1 = {
+    componentName: 'testwidget1',
+    settings: [{ ComponentTitle: 'testwidget title 1' }],
+  };
+  const mockWidget2 = {
+    componentName: 'testwidget2',
+    settings: [{ ComponentTitle: 'testwidget title 2' }],
+  };
 
-  it.skip('Delete a user', () =>
-    user.delete(userName).then((response) => {
-      expect(response).to.be.an('object');
-      expect(response.deletedCount).to.be.equal(1);
-    }),
-  );
+  let addedWidgetId = '';
 
-  it.skip('Add a user', () =>
-    user.add(userName, 'Jonas Wingård').then((response) => {
+  after((done) => {
+    if (deleteUser) {
+      user.delete(userName).then(() => {
+        console.log(`User with username: ${userName} has been removed.`);
+        done();
+      });
+    } else {
+      done();
+    }
+  });
+
+  it('Add a user', () =>
+    user.add(userName, 'Test User').then((response) => {
       expect(response).to.be.an('object');
       expect(response.username).to.equal(userName);
     }),
   );
 
-  it.skip('Add userwidgets', () =>
-    user.addUserWidgets(userName, []).then((response) => {
+  it('Add a user a second time, should throw an error', () =>
+    user.add(userName, 'Test User').catch((error) => {
+      expect(error).to.be.an('object');
+    }),
+  );
+
+  it('Add a widget', () =>
+    user.addUserWidget(userName, mockWidget1).then((response) => {
       expect(response).to.be.an('object');
     }),
   );
 
-  it.skip('Get all user widgets', () =>
-    user.getUserWidgets(userName).then((response) => {
-      console.log(response);
+  it('Add another widget', () =>
+    user.addUserWidget(userName, mockWidget2).then((response) => {
+      expect(response).to.be.an('object');
+    }),
+  );
+
+  it('Get all user widgets', () =>
+    user.getUserWidgetItem(userName).then((response) => {
       expect(response).to.be.an('object');
       expect(response.widgetList).to.be.an('array');
       expect(response.widgetList).to.have.length.above(0);
+      addedWidgetId = response.widgetList[0]._id;
     }),
   );
 
-  it.skip('Get specific widget by index', () =>
-    user.getUserWidget(userName, 1).then((response) => {
-      console.log(response);
+  it('Get specific widget by id', () =>
+    user.getUserWidgetById(addedWidgetId).then((response) => {
       expect(response).to.be.an('object');
       expect(response.componentName).to.be.a('string');
     }),
   );
 
-  it.skip('Change position of a widget', () =>
-    user.moveUserWidget(userName, 0, 2).then((response) => {
-      console.log(response);
-      // expect(response).to.be.a('string');
+  it('Get specific widget by index', () =>
+    user.getUserWidgetByIndex(userName, 0).then((response) => {
+      expect(response).to.be.an('object');
+      expect(response.componentName).to.be.a('string');
     }),
   );
 
-  it('Update widget', (done) => {
-    user.getUserWidgetById('593a4eebc61d8f1bd8cc7e08').then((widget) => {
-      expect(widget).to.be.an('object');
-      const tempWidget = widget;
-      tempWidget.settings.ComponentTitle = 'a very new title...';
-
-      user.updateUserWidget(tempWidget._id, tempWidget.settings).then((response) => {
-        expect(response).to.be.an('object');
+  it('Change position of a widget', (done) => {
+    user.moveUserWidget(userName, 0, 1).then(() => {
+      user.getUserWidgetByIndex(userName, 0).then((widget) => {
+        expect(widget.componentName).to.equal(mockWidget2.componentName);
         done();
+      });
+    });
+  });
+
+  it('Update widget', (done) => {
+    user.getUserWidgetById(addedWidgetId).then((widget) => {
+      const updatedTitle = 'updated title';
+      const tempWidget = widget;
+      tempWidget.settings[0].ComponentTitle = updatedTitle;
+
+      user.updateUserWidget(tempWidget._id, tempWidget.settings).then(() => {
+        user.getUserWidgetById(addedWidgetId).then((updatedWidget) => {
+          expect(updatedWidget).to.be.an('object');
+          expect(updatedWidget.settings[0].ComponentTitle).to.equal(updatedTitle);
+          done();
+        });
       });
     });
   });
