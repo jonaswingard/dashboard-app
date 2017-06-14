@@ -14,14 +14,21 @@ import { WidgetComponent } from '../widget.component';
 })
 export class PocketComponent extends WidgetComponent implements OnInit {
   @ViewChild(PocketTagComponent) pocketTagComponent: PocketTagComponent;
-  @Input() ComponentTitle: string;
-  @Input() Limit: number = 5;
+  private Limit: number = 5;
 
   private items: IPocket[];
   private selectedItem: IPocket;
 
   constructor(private pocketService: PocketService) {
     super();
+  }
+
+  ngOnInit() {
+    this.Limit = parseInt(this.getSetting('Limit'), 10);
+    if (this.getSetting('Visible')) {
+      this.pocketService.get(this.Limit)
+        .subscribe(items => this.items = items);
+    }
   }
 
   toggleLoading(item) {
@@ -71,12 +78,5 @@ export class PocketComponent extends WidgetComponent implements OnInit {
   onShowModal(item): void {
     this.selectedItem = item;
     this.pocketTagComponent.onShowModal();
-  }
-
-  ngOnInit() {
-    if (!this.settings.Hidden) {
-      this.pocketService.get(this.Limit)
-        .subscribe(items => this.items = items);
-    }
   }
 }

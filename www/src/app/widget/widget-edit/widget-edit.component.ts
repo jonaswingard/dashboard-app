@@ -34,9 +34,11 @@ export class WidgetEditComponent implements OnInit {
   onShowModal() {
     this.showModal = true;
 
-    setTimeout(() => {
-      this.inputRef.nativeElement.focus();
-    }, 100);
+    if (this.inputRef) {
+      setTimeout(() => {
+        this.inputRef.nativeElement.focus();
+      }, 100);
+    }
 
   };
 

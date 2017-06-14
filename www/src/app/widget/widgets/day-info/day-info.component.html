@@ -2,12 +2,12 @@
   <div class="content widget-item__header">
     <h2>
       <i class="calendar icon green"></i>
-      <span>{{settings.ComponentTitle}}</span>
+      <span>{{getSetting('ComponentTitle')}}</span>
     </h2>
     <widget-edit (onSaveWidget)="onSaveWidget($event)" [Settings]="settings"></widget-edit>
   </div>
   <div class="content">
-    <div *ngIf="dayInfo && !settings.Hidden">
+    <div *ngIf="dayInfo">
       <div *ngIf="dayInfo.flagday">
         <strong>Flaggdag:</strong> {{dayInfo.flagday}}
       </div>

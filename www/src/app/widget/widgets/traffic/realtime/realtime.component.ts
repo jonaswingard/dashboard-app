@@ -16,8 +16,8 @@ export class RealtimeComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.settings.Hidden && this.settings.SiteId) {
-      this.trafficService.getRealtime(this.settings.SiteId).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
+    if (this.getSetting('Visible') && this.getSetting('SiteId')) {
+      this.trafficService.getRealtime(this.getSetting('SiteId')).subscribe(realtimeInfo => this.realtimeInfo = realtimeInfo);
     }
   }
 }

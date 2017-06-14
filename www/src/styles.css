@@ -73,20 +73,21 @@ a.ui.black:focus {
   margin-bottom: 0;
   display: flex;
   overflow: hidden;
-
 }
 .widget-item__header > h2 > span {
   margin-left: 0.1em;
 }
 .widget-item__header > widget-edit {
   margin-left: auto;
-  opacity: 0;
-  transition: opacity 0.2s;
+  /*opacity: 0;*/
+  /*max-width: 0;*/
+  transition: all 0.2s;
 }
-.widget-item:hover .widget-item__header > widget-edit,
+/*.widget-item:hover .widget-item__header > widget-edit,
 .widget-item:focus .widget-item__header > widget-edit {
   opacity: 1;
-}
+  max-width: 36px;
+}*/
 .pocket-logo {
   height: 1em;
   margin-top: 4px;

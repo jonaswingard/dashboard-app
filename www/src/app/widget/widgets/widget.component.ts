@@ -19,4 +19,10 @@ export class WidgetComponent {
     this.settings = updatedSettings;
     this.onSave.next(this);
   }
+
+  getSetting(key: string): string {
+    return this.settings.length
+      ? this.settings.filter(setting => setting.name === key)[0].value
+      : '';
+  }
 }

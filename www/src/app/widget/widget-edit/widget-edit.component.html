@@ -5,14 +5,22 @@
   <div class="content">
     <div class="description">
       <div class="ui header">Redigera inställningar</div>
-      <div class="ui form">
-        <div class="field">
-          <div class="ui input">
-            <input [(ngModel)]="Settings.ComponentTitle" #setFocus>
+      <div class="ui form" *ngIf="Settings.length">
+        <div class="field" *ngFor="let setting of Settings; let isFirst = first;">
+          <div [ngSwitch]="setting.type">
+            <div *ngSwitchCase="'boolean'">
+              <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'"></lsu-checkbox>
+            </div>
+            <div *ngSwitchDefault>
+              <div class="ui input">
+                <label>
+                  <div>{{setting.title}}</div>
+                  <input *ngIf="isFirst" [(ngModel)]="setting.value" #setFocus>
+                  <input *ngIf="!isFirst" [(ngModel)]="setting.value">
+                </label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <lsu-checkbox [(ngModel)]="Settings.Hidden" [label]="'Dölj widget'" [type]="'checkbox'"></lsu-checkbox>
         </div>
       </div>
     </div>

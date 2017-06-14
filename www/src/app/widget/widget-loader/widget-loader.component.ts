@@ -46,13 +46,27 @@ export class WidgetLoaderComponent implements OnInit {
     this.widgetLoaderService.loadWidgets();
   }
 
-  private addComponent(component, id, props) {
+  private getSetting(settings: any, key: string): string {
+    return settings.length
+      ? settings.filter(setting => setting.name === key)[0].value
+      : '';
+  }
+
+  private addComponent(component, id, settings) {
     const componentFactory = this.componentFactoryResolver
       .resolveComponentFactory(component);
     const componentRef = this.componentContainer.createComponent(componentFactory);
-    componentRef.location.nativeElement.classList.add('widget-item');
+
     componentRef.instance._id = id;
-    componentRef.instance.settings = {};
+    componentRef.instance.settings = settings;
+    componentRef.location.nativeElement.classList.add('widget-item');
+
+    const widgetSize = this.getSetting(settings, 'Size');
+    if (widgetSize) {
+      componentRef.location.nativeElement.classList.add(widgetSize);
+    }
+
+    componentRef.changeDetectorRef.detectChanges();
 
     if (componentRef.instance.onSave) {
       componentRef.instance.onSave.subscribe(widget => {
@@ -61,14 +75,5 @@ export class WidgetLoaderComponent implements OnInit {
         });
       });
     }
-
-    Object.keys(props).forEach(function (key) {
-      if (key === 'Size') {
-        componentRef.location.nativeElement.classList.add(props[key]);
-      }
-      componentRef.instance.settings[key] = props[key];
-    });
-
-    componentRef.changeDetectorRef.detectChanges();
   }
 }

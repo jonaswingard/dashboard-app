@@ -20,7 +20,7 @@ export class TrafficStatusComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.settings.Hidden) {
+    if (this.getSetting('Visible')) {
       this.trafficService.getInfo().subscribe(trafficStatus => this.trafficStatus = trafficStatus);
     }
   }

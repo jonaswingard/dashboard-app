@@ -14,13 +14,14 @@ import { WidgetComponent } from '../widget.component';
 })
 export class DayInfoComponent extends WidgetComponent implements OnInit {
   private dayInfo: IDayInfo;
+  private componentTitle: string;
 
   constructor(private todaysNameService: DayInfoService) {
     super();
   }
 
   ngOnInit() {
-    if (!this.settings.Hidden) {
+    if (this.getSetting('Visible')) {
       this.todaysNameService.get().subscribe(info => this.dayInfo = info);
     }
   }
