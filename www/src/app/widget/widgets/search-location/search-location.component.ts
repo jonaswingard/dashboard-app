@@ -13,11 +13,14 @@ import { WidgetComponent } from '../widget.component';
   templateUrl: './search-location.component.html'
 })
 export class SearchLocationComponent extends WidgetComponent {
-  public static WidgetTitle = 'Sök hållplats';
+  public static get DefaultSettings() {
+    return [
+      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Sök hållplats')
+    ];
+  }
   private items: any;
   private query: string;
   private selectedItem: any;
-  @Input() ComponentTitle: string = 'Sök hållplats';
 
   constructor(private trafficService: TrafficService) {
     super();

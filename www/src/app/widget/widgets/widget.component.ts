@@ -10,9 +10,38 @@ import { Subject } from 'rxjs/Subject';
 })
 export class WidgetComponent {
   public static WidgetTitle = 'Widget';
+
+  public static get DefaultSettings() {
+    return [{
+      title: 'Titel',
+      value: 'Standard widget',
+      type: 'text',
+      name: 'ComponentTitle'
+    }, {
+      type: 'text',
+      value: 'widget-item--small',
+      title: 'Storlek',
+      name: 'Size'
+    }, {
+      type: 'boolean',
+      value: true,
+      title: 'Synlig',
+      name: 'Visible'
+    }];
+  }
+
   public settings;
   private onSaveWidget: Subject<any> = new Subject();
   private onDeleteWidget: Subject<any> = new Subject();
+
+  public static UpdateSetting(name, value) {
+    return WidgetComponent.DefaultSettings.map(setting => {
+      if (setting.name === name) {
+        setting.value = value;
+      }
+      return setting;
+    });
+  }
 
   constructor() {}
 
@@ -29,8 +58,14 @@ export class WidgetComponent {
     if (typeof this.settings === 'undefined') {
       console.error('No settings defined');
     }
-    return this.settings && this.settings.length
-      ? this.settings.filter(setting => setting.name === key)[0].value
-      : '';
+
+    if (this.settings && this.settings.length) {
+      const filteredSetting = this.settings.filter(setting => setting.name === key);
+      if (filteredSetting.length) {
+        return filteredSetting[0].value;
+      }
+    }
+
+    return '';
   }
 }

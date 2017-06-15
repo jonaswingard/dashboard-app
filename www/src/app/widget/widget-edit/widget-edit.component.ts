@@ -43,7 +43,6 @@ export class WidgetEditComponent implements OnInit {
         this.inputRef.nativeElement.focus();
       }, 100);
     }
-
   };
 
   onSaveWidget(e): void {

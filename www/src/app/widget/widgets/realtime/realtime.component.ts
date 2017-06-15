@@ -9,7 +9,11 @@ import { WidgetComponent } from '../widget.component';
   templateUrl: './realtime.component.html'
 })
 export class RealtimeComponent extends WidgetComponent implements OnInit {
-  public static WidgetTitle = 'Avgångsinfo';
+  public static get DefaultSettings() {
+    return [
+      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Avgångsinfo')
+    ];
+  }
   private realtimeInfo: any;
 
   constructor (private trafficService: TrafficService) {

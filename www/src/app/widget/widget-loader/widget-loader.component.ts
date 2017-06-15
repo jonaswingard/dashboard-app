@@ -44,7 +44,7 @@ export class WidgetLoaderComponent implements OnInit {
   ngOnInit() {
     Object.keys(this.widgetCollection).forEach((key) => {
       this.availableWidgets.push({
-        title: this.widgetCollection[key].WidgetTitle,
+        title: this.getSetting(this.widgetCollection[key].DefaultSettings, 'ComponentTitle'),
         type: key
       });
     });

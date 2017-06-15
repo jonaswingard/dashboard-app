@@ -13,7 +13,18 @@ import { WidgetComponent } from '../widget.component';
   styleUrls: ['./pocket.component.css']
 })
 export class PocketComponent extends WidgetComponent implements OnInit {
-  public static WidgetTitle = 'Pocketlista';
+  public static get DefaultSettings() {
+    return [
+      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Pocketlista'),
+      {
+          name: 'Limit',
+          title: 'Antal som visas',
+          value: '5',
+          type: 'text'
+      }
+    ];
+  }
+
   private Limit: number = 5;
   private items: IPocket[];
   private selectedItem: IPocket;
@@ -24,7 +35,10 @@ export class PocketComponent extends WidgetComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.Limit = parseInt(this.getSetting('Limit'), 10);
+    const limit = this.getSetting('Limit');
+    if (limit.length) {
+      this.Limit = parseInt(limit, 10);
+    }
     if (this.getSetting('Visible')) {
       this.pocketService.get(this.Limit)
         .subscribe(items => this.items = items);

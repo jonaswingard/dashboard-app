@@ -13,7 +13,11 @@ import { WidgetComponent } from '../widget.component';
   templateUrl: './traffic-status.component.html'
 })
 export class TrafficStatusComponent extends WidgetComponent implements OnInit {
-  public static WidgetTitle = 'Trafikstatus';
+  public static get DefaultSettings() {
+    return [
+      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Trafikstatus')
+    ];
+  }
   private trafficStatus: any;
 
   constructor(private trafficService: TrafficService) {
