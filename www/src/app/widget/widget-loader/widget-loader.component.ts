@@ -9,9 +9,9 @@ import {
 import { WidgetLoaderService } from './widget-loader.service';
 import { DayInfoComponent } from '../widgets/day-info/day-info.component';
 import { PocketComponent } from '../widgets/pocket/pocket.component';
-import { TrafficStatusComponent } from '../widgets/traffic/traffic-status/traffic-status.component';
-import { SearchLocationComponent } from '../widgets/traffic/search-location/search-location.component';
-import { RealtimeComponent } from '../widgets/traffic/realtime/realtime.component';
+import { TrafficStatusComponent } from '../widgets/traffic-status/traffic-status.component';
+import { SearchLocationComponent } from '../widgets/search-location/search-location.component';
+import { RealtimeComponent } from '../widgets/realtime/realtime.component';
 
 @Component({
   selector: 'widget-loader',
@@ -38,7 +38,8 @@ export class WidgetLoaderComponent implements OnInit {
   ngOnInit() {
     Object.keys(this.widgetCollection).forEach((key) => {
       this.availableWidgets.push({
-        title: this.widgetCollection[key].WidgetTitle
+        title: this.widgetCollection[key].WidgetTitle,
+        type: key
       });
     });
 
@@ -50,11 +51,16 @@ export class WidgetLoaderComponent implements OnInit {
       }
     });
 
-    this.widgetLoaderService.loadWidgets();
+    this.widgetLoaderService.loadWidgets('foobar');
   }
 
   onAddWidget(widget) {
-    console.log(widget);
+    this.widgetLoaderService.addWidget('foobar', {
+      type: widget.type,
+      title: widget.title
+    }).subscribe(foo => {
+      console.log(foo);
+    });
   }
 
   private getSetting(settings: any, key: string): string {
@@ -83,6 +89,15 @@ export class WidgetLoaderComponent implements OnInit {
       componentRef.instance.onSave.subscribe(widget => {
         this.widgetLoaderService.saveWidget(widget).subscribe(() => {
           componentRef.instance.settings = widget.settings;
+        });
+      });
+    }
+
+    if (componentRef.instance.onDeleteWidget) {
+      componentRef.instance.onDeleteWidget.subscribe(widgetId => {
+        this.widgetLoaderService.deleteWidget(widgetId).subscribe(() => {
+          console.log('done');
+          // componentRef.instance.settings = widget.settings;
         });
       });
     }

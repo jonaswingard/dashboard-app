@@ -8,10 +8,10 @@ import { WidgetEditComponent } from './widget-edit/widget-edit.component';
 import { DayInfoComponent } from './widgets/day-info/day-info.component';
 import { PocketComponent } from './widgets/pocket/pocket.component';
 import { PocketTagComponent } from './widgets/pocket/pocket-tag/pocket-tag.component';
-import { TrafficStatusComponent } from './widgets/traffic/traffic-status/traffic-status.component';
-import { RealtimeComponent } from './widgets/traffic/realtime/realtime.component';
-import { DepartureInfoComponent } from './widgets/traffic/departure-info/departure-info.component';
-import { SearchLocationComponent } from './widgets/traffic/search-location/search-location.component';
+import { TrafficStatusComponent } from './widgets/traffic-status/traffic-status.component';
+import { RealtimeComponent } from './widgets/realtime/realtime.component';
+import { DepartureInfoComponent } from './widgets/realtime/departure-info/departure-info.component';
+import { SearchLocationComponent } from './widgets/search-location/search-location.component';
 
 @NgModule({
   imports: [

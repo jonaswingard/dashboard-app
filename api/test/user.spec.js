@@ -60,7 +60,7 @@ describe('Widgets and users', () => {
     user.getUserWidgetItem(userName).then((response) => {
       expect(response).to.be.an('object');
       expect(response.widgetList).to.be.an('array');
-      expect(response.widgetList).to.have.length.above(0);
+      expect(response.widgetList).length.to.be(2);
       addedWidgetId = response.widgetList[0]._id;
     }),
   );
@@ -100,6 +100,18 @@ describe('Widgets and users', () => {
           expect(updatedWidget.settings[0].ComponentTitle).to.equal(updatedTitle);
           done();
         });
+      });
+    });
+  });
+
+  it('Delete a widget', (done) => {
+    user.deleteUserWidget(addedWidgetId).then(() => {
+      user.getUserWidgetItem(userName).then((response) => {
+        expect(response).to.be.an('object');
+        expect(response.widgetList).to.be.an('array');
+        expect(response.widgetList).length.to.be(1);
+        expect(response.widgetList[0].componentName).not.to.equal(mockWidget1.componentName);
+        done();
       });
     });
   });

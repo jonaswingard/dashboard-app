@@ -126,4 +126,23 @@ export default {
       });
     });
   },
+
+  deleteUserWidget(widgetId) {
+    return new Promise((resolve) => {
+      UserWidget.findOne({ 'widgetList._id': widgetId }).then((userWidget) => {
+        const widgetIndex = userWidget.widgetList.findIndex(
+          widgetItem => widgetItem._id.toString() === widgetId.toString());
+
+        const tempList = userWidget.widgetList;
+        tempList.splice(widgetIndex, 1);
+
+        UserWidget.findOneAndUpdate(
+          { 'widgetList._id': widgetId },
+          { $set: { widgetList: tempList } }, (err, doc) => {
+            resolve(doc);
+          },
+        );
+      });
+    });
+  },
 };

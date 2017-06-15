@@ -12,6 +12,8 @@ export class WidgetLoaderService {
   private httpOptions = new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json' }) });
   private apiUrl = '/api/user/widgets';
   private apiSaveWidgetUrl = '/api/user/widget/save';
+  private apiAddWidgetUrl = '/api/user/widget/add';
+  private apiDeleteWidgetUrl = '/api/user/widget/delete';
   private bSubject: BehaviorSubject<string>;
 
   private widgetsSubject: BehaviorSubject<any>;
@@ -21,8 +23,8 @@ export class WidgetLoaderService {
     this.widgetsSubject = new BehaviorSubject<any>({});
   }
 
-  loadWidgets() {
-    this.http.get(this.apiUrl)
+  loadWidgets(username: string) {
+    this.http.post(this.apiUrl, {username})
       .map(response => response.json())
       .catch(ErrorService.handleError)
       .subscribe(
@@ -41,6 +43,39 @@ export class WidgetLoaderService {
     return this.http.post(this.apiSaveWidgetUrl, {
       id: item._id,
       settings: item.settings
+    }, this.httpOptions)
+      .catch(ErrorService.handleError);
+  }
+
+  deleteWidget(widgetid: string): Observable<any> {
+    return this.http.post(this.apiDeleteWidgetUrl, {
+      widgetid
+    }, this.httpOptions)
+      .catch(ErrorService.handleError);
+  }
+
+  addWidget(username, item): Observable<any> {
+    return this.http.post(this.apiAddWidgetUrl, {
+      username,
+      widget: {
+        componentName: item.type,
+        settings: [{
+          title: 'Titel',
+          value: item.title,
+          type: 'text',
+          name: 'ComponentTitle'
+        }, {
+          type: 'text',
+          value: 'widget-item--small',
+          title: 'Storlek',
+          name: 'Size'
+        }, {
+          type: 'boolean',
+          value: true,
+          title: 'Synlig',
+          name: 'Visible'
+        }]
+      }
     }, this.httpOptions)
       .catch(ErrorService.handleError);
   }

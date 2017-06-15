@@ -6,7 +6,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe.only('API Tests', () => {
+describe('API Tests', () => {
   const mockUserName = 'testuser1';
 
   it('Should be able to add a new user', (done) => {

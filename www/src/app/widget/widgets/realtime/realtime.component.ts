@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { TrafficService } from '../traffic.service';
-import { WidgetComponent } from '../../widget.component';
+import { TrafficService } from '../traffic/traffic.service';
+import { WidgetComponent } from '../widget.component';
 
 @Component({
   selector: 'traffic-realtime',

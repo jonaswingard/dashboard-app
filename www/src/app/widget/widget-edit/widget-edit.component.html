@@ -5,8 +5,8 @@
   <div class="content">
     <div class="description">
       <div class="ui header">Redigera inställningar</div>
-      <div class="ui form" *ngIf="Settings.length">
-        <div class="field" *ngFor="let setting of Settings; let isFirst = first;">
+      <div class="ui form" *ngIf="Widget && Widget.Settings && Widget.Settings.length">
+        <div class="field" *ngFor="let setting of Widget.Settings; let isFirst = first;">
           <div [ngSwitch]="setting.type">
             <div *ngSwitchCase="'boolean'">
               <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'"></lsu-checkbox>
@@ -31,6 +31,9 @@
     </button>
     <button class="ui black deny button" (click)="showModal = false;">
       Avbryt
+    </button>
+    <button class="ui black red button" (click)="onDeleteWidget($event)">
+      Ta bort
     </button>
   </div>
 </lsu-modal>

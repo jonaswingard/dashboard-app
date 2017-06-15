@@ -33,5 +33,11 @@ router.post('/widget/add', (req, res) => {
   });
 });
 
+router.post('/widget/delete', (req, res) => {
+  userService.deleteUserWidget(req.body.widgetid).then((response) => {
+    res.json(response);
+  });
+});
+
 
 module.exports = router;
