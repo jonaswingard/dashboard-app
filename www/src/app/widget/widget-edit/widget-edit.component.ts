@@ -14,13 +14,14 @@ import {
 })
 export class WidgetEditComponent implements OnInit {
   @Input() Widget: any;
-  @Output() onSaveWidget = new EventEmitter<any>();
+  @Output() onSaveWidgetEvent = new EventEmitter<any>();
   @Output() onDeleteWidgetEvent = new EventEmitter<any>();
   @ViewChild('setFocus') inputRef: ElementRef;
 
   modalOptions: any;
   showModal: boolean;
   addedTag: string;
+  private settings: any;
 
   constructor() {}
 
@@ -30,6 +31,8 @@ export class WidgetEditComponent implements OnInit {
       type: 'default',
       closeable: true
     };
+
+    this.settings = this.Widget.settings.map(x => Object.assign({}, x));
   };
 
   onShowModal() {
@@ -43,8 +46,8 @@ export class WidgetEditComponent implements OnInit {
 
   };
 
-  onSaveSettings(e): void {
-    this.onSaveWidget.emit(this.Widget.Settings);
+  onSaveWidget(e): void {
+    this.onSaveWidgetEvent.emit(this.settings);
     this.showModal = false;
   };
 

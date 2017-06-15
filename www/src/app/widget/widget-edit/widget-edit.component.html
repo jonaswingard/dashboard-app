@@ -5,8 +5,8 @@
   <div class="content">
     <div class="description">
       <div class="ui header">Redigera inställningar</div>
-      <div class="ui form" *ngIf="Widget && Widget.Settings && Widget.Settings.length">
-        <div class="field" *ngFor="let setting of Widget.Settings; let isFirst = first;">
+      <div class="ui form" *ngIf="settings && settings.length">
+        <div class="field" *ngFor="let setting of settings; let isFirst = first;">
           <div [ngSwitch]="setting.type">
             <div *ngSwitchCase="'boolean'">
               <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'"></lsu-checkbox>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="actions">
-    <button class="ui positive right button" (click)="onSaveSettings($event)">
+    <button class="ui positive right button" (click)="onSaveWidget($event)">
       Spara
     </button>
     <button class="ui black deny button" (click)="showModal = false;">

@@ -4,7 +4,7 @@
       <img src="/assets/pocket-logo.png" class="pocket-logo">
       <span>{{getSetting('ComponentTitle')}}</span>
     </h2>
-    <widget-edit (onSaveWidget)="onSaveWidget($event)" [Widget]="this"></widget-edit>
+    <widget-edit (onSaveWidgetEvent)="onSaveWidgetEvent($event)" (onDeleteWidgetEvent)="onDeleteWidgetEvent($event)" [Widget]="this"></widget-edit>
   </div>
   <div class="content">
     <div [ngClass]="{'loading-item--is-loading': !(items), 'loading-item':true}">

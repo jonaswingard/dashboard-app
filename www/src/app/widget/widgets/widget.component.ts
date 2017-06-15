@@ -11,14 +11,14 @@ import { Subject } from 'rxjs/Subject';
 export class WidgetComponent {
   public static WidgetTitle = 'Widget';
   public settings;
-  private onSave: Subject<any> = new Subject();
+  private onSaveWidget: Subject<any> = new Subject();
   private onDeleteWidget: Subject<any> = new Subject();
 
   constructor() {}
 
-  onSaveWidget(updatedSettings: any): void {
+  onSaveWidgetEvent(updatedSettings: any): void {
     this.settings = updatedSettings;
-    this.onSave.next(this);
+    this.onSaveWidget.next(this);
   }
 
   onDeleteWidgetEvent(widgetId: string): void {
@@ -26,7 +26,10 @@ export class WidgetComponent {
   }
 
   getSetting(key: string): string {
-    return this.settings.length
+    if (typeof this.settings === 'undefined') {
+      console.error('No settings defined');
+    }
+    return this.settings && this.settings.length
       ? this.settings.filter(setting => setting.name === key)[0].value
       : '';
   }
