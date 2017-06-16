@@ -18,9 +18,9 @@ export class WidgetEditComponent implements OnInit {
   @Output() onDeleteWidgetEvent = new EventEmitter<any>();
   @ViewChild('setFocus') inputRef: ElementRef;
 
-  modalOptions: any;
-  showModal: boolean;
-  addedTag: string;
+  private modalOptions: any;
+  private showModal: boolean;
+  private addedTag: string;
   private settings: any;
 
   constructor() {}
@@ -51,7 +51,10 @@ export class WidgetEditComponent implements OnInit {
   };
 
   onDeleteWidget(e): void {
-    this.onDeleteWidgetEvent.emit(this.Widget._id);
-    this.showModal = false;
+    if (confirm('Vill du verkligen ta bort den här widgeten?')) {
+      this.onDeleteWidgetEvent.emit(this.Widget._id);
+      this.showModal = false;
+    }
+
   }
 }

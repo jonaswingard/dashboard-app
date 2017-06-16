@@ -90,3 +90,12 @@ a.ui.black:focus {
   right: 1.25rem;
   top: 1.25rem;
 }
+.add-widget-action {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.main.container {
+  margin-top: 5rem;
+  position: relative;
+}
