@@ -1025,6 +1025,17 @@
   width: 100%;
 }
 
+/* Custom */
+.ui.form.center {
+  text-align: center;
+}
+.ui.form.center label {
+  margin: 0 auto;
+}
+.ui.form.center label > div {
+  font-weight: bold;
+}
+
 /*--------------------
         Sizes
 ---------------------*/

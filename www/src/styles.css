@@ -79,16 +79,14 @@ a.ui.black:focus {
 }
 .widget-item__header > widget-edit {
   margin-left: auto;
-  /*opacity: 0;*/
-  /*max-width: 0;*/
   transition: all 0.2s;
 }
-/*.widget-item:hover .widget-item__header > widget-edit,
-.widget-item:focus .widget-item__header > widget-edit {
-  opacity: 1;
-  max-width: 36px;
-}*/
 .pocket-logo {
   height: 1em;
   margin-top: 4px;
+}
+.remove-widget-action {
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
 }

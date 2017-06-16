@@ -2,21 +2,32 @@
   <i class="icon settings"></i>
 </button>
 <lsu-modal [(ngModel)]="showModal" [options]="modalOptions">
-  <div class="content">
-    <div class="description">
-      <div class="ui header">Redigera inställningar</div>
-      <div class="ui form" *ngIf="settings && settings.length">
+  <div class="header">
+    <h2 class="ui center aligned icon header">
+      <i class="settings icon"></i>
+      <div class="content">
+        Inställningar
+        <div class="sub header">Redigera inställningar för din widget här.</div>
+      </div>
+    </h2>
+    <button class="ui red icon button remove-widget-action" type="button" (click)="onDeleteWidget($event)" data-tooltip="Ta bort widget">
+      <i class="icon trash"></i>
+    </button>
+  </div>
+  <form *ngIf="settings && settings.length" class="">
+    <div class="content">
+      <div class="ui form center">
         <div class="field" *ngFor="let setting of settings; let isFirst = first;">
           <div [ngSwitch]="setting.type">
             <div *ngSwitchCase="'boolean'">
-              <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'"></lsu-checkbox>
+              <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'" [name]="setting.title"></lsu-checkbox>
             </div>
             <div *ngSwitchDefault>
               <div class="ui input">
                 <label>
                   <div>{{setting.title}}</div>
-                  <input *ngIf="isFirst" [(ngModel)]="setting.value" #setFocus>
-                  <input *ngIf="!isFirst" [(ngModel)]="setting.value">
+                  <input *ngIf="isFirst" [(ngModel)]="setting.value" [name]="setting.title" #setFocus>
+                  <input *ngIf="!isFirst" [(ngModel)]="setting.value" [name]="setting.title">
                 </label>
               </div>
             </div>
@@ -24,16 +35,14 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="actions">
-    <button class="ui positive right button" (click)="onSaveWidget($event)">
-      Spara
-    </button>
-    <button class="ui black deny button" (click)="showModal = false;">
-      Avbryt
-    </button>
-    <button class="ui black red button" (click)="onDeleteWidget($event)">
-      Ta bort
-    </button>
-  </div>
+    <div class="actions">
+      <button class="ui positive button labeled icon" (click)="onSaveWidget($event)">
+        <i class="icon save"></i>
+        Spara
+      </button>
+      <button class="ui black deny button" type="button" (click)="showModal = false;">
+        Avbryt
+      </button>
+    </div>
+  </form>
 </lsu-modal>

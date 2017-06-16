@@ -93,7 +93,7 @@
      Content
 ---------------*/
 
-.ui.modal > .content {
+.ui.modal .content {
   display: block;
   width: 100%;
   font-size: 1em;
@@ -112,7 +112,7 @@
 }
 
 /* Image */
-.ui.modal > .content > .image {
+.ui.modal .content > .image {
   display: block;
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
@@ -139,7 +139,7 @@
 }
 
 /* Description */
-.ui.modal > .content > .description {
+.ui.modal .content > .description {
   display: block;
   -webkit-box-flex: 1;
       -ms-flex: 1 0 auto;
@@ -149,8 +149,8 @@
       -ms-grid-row-align: top;
       align-self: top;
 }
-.ui.modal > .content > .icon + .description,
-.ui.modal > .content > .image + .description {
+.ui.modal .content > .icon + .description,
+.ui.modal .content > .image + .description {
   -webkit-box-flex: 0;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto;
@@ -159,7 +159,7 @@
   padding-left: 2em;
 }
 /*rtl:ignore*/
-.ui.modal > .content > .image > i.icon {
+.ui.modal .content > .image > i.icon {
   margin: 0em;
   opacity: 1;
   width: auto;
@@ -171,7 +171,7 @@
      Actions
 ---------------*/
 
-.ui.modal > .actions {
+.ui.modal .actions {
   background: #F9FAFB;
   padding: 1rem 1rem;
   border-top: 1px solid rgba(34, 36, 38, 0.15);
@@ -236,7 +236,7 @@
     padding: 0.75rem 1rem !important;
     padding-right: 2.25rem !important;
   }
-  .ui.modal > .content {
+  .ui.modal .content {
     display: block;
     padding: 1rem !important;
   }
@@ -258,7 +258,7 @@
     text-align: center;
     padding: 0rem 0rem 1rem !important;
   }
-  .ui.modal > .content > .image > i.icon {
+  .ui.modal .content > .image > i.icon {
     font-size: 5rem;
     text-align: center;
   }
@@ -272,7 +272,7 @@
   }
   
 /* Let Buttons Stack */
-  .ui.modal > .actions {
+  .ui.modal .actions {
     padding: 1rem 1rem 0rem !important;
   }
   .ui.modal .actions > .buttons,

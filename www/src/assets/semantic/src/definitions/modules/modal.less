@@ -104,7 +104,7 @@
      Content
 ---------------*/
 
-.ui.modal > .content {
+.ui.modal .content {
   display: block;
   width: 100%;
   font-size: @contentFontSize;
@@ -118,7 +118,7 @@
 }
 
 /* Image */
-.ui.modal > .content > .image {
+.ui.modal .content > .image {
   display: block;
   flex: 0 1 auto;
   width: @imageWidth;
@@ -135,15 +135,15 @@
 }
 
 /* Description */
-.ui.modal > .content > .description {
+.ui.modal .content > .description {
   display: block;
   flex: 1 0 auto;
   min-width: 0px;
   align-self: @descriptionVerticalAlign;
 }
 
-.ui.modal > .content > .icon + .description,
-.ui.modal > .content > .image + .description {
+.ui.modal .content > .icon + .description,
+.ui.modal .content > .image + .description {
   flex: 0 1 auto;
   min-width: @descriptionMinWidth;
   width: @descriptionWidth;
@@ -151,7 +151,7 @@
 }
 
 /*rtl:ignore*/
-.ui.modal > .content > .image > i.icon {
+.ui.modal .content > .image > i.icon {
   margin: 0em;
   opacity: 1;
   width: auto;
@@ -163,7 +163,7 @@
      Actions
 ---------------*/
 
-.ui.modal > .actions {
+.ui.modal .actions {
   background: @actionBackground;
   padding: @actionPadding;
   border-top: @actionBorder;
@@ -228,7 +228,7 @@
     padding: @mobileHeaderPadding !important;
     padding-right: @closeHitbox !important;
   }
-  .ui.modal > .content {
+  .ui.modal .content {
     display: block;
     padding: @mobileContentPadding !important;
   }
@@ -248,7 +248,7 @@
     text-align: center;
     padding: @mobileImagePadding !important;
   }
-  .ui.modal > .content > .image > i.icon {
+  .ui.modal .content > .image > i.icon {
     font-size: @mobileImageIconSize;
     text-align: center;
   }
@@ -263,7 +263,7 @@
   }
 
   /* Let Buttons Stack */
-  .ui.modal > .actions {
+  .ui.modal .actions {
     padding: @mobileActionPadding !important;
   }
   .ui.modal .actions > .buttons,
