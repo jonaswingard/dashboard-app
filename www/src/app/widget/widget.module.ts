@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { L_SEMANTIC_UI_MODULE } from 'angular2-semantic-ui';
 
-import { WidgetLoaderComponent } from './widget-loader/widget-loader.component';
+import { WidgetManagerComponent } from './widget-manager/widget-manager.component';
 import { WidgetEditComponent } from './widget-edit/widget-edit.component';
 import { DayInfoComponent } from './widgets/day-info/day-info.component';
 import { PocketComponent } from './widgets/pocket/pocket.component';
@@ -20,7 +20,7 @@ import { SearchLocationComponent } from './widgets/search-location/search-locati
     L_SEMANTIC_UI_MODULE
   ],
   declarations: [
-    WidgetLoaderComponent,
+    WidgetManagerComponent,
     WidgetEditComponent,
     DayInfoComponent,
     PocketComponent,
@@ -39,7 +39,7 @@ import { SearchLocationComponent } from './widgets/search-location/search-locati
     SearchLocationComponent,
   ],
   exports : [
-    WidgetLoaderComponent
+    WidgetManagerComponent
   ]
 })
 export class WidgetModule {}

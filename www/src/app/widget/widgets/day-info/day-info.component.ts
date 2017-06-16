@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DayInfoService } from './day-info.service';
 import { IDayInfo } from './day-info';
 import { WidgetComponent } from '../widget.component';
