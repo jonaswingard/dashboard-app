@@ -11,7 +11,13 @@ import { WidgetComponent } from '../widget.component';
 export class RealtimeComponent extends WidgetComponent implements OnInit {
   public static get DefaultSettings() {
     return [
-      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Avgångsinfo')
+      ...WidgetComponent.UpdateSetting('ComponentTitle', 'Avgångsinfo'),
+      {
+          name: 'SiteId',
+          title: 'SiteId',
+          value: '',
+          type: 'text'
+      }
     ];
   }
   private realtimeInfo: any;
