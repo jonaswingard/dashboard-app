@@ -54,27 +54,12 @@ export class WidgetManagerService {
       .catch(ErrorService.handleError);
   }
 
-  addWidget(username, item): Observable<any> {
+  addWidget(username: string, type: any, settings: any): Observable<any> {
     return this.http.post(this.apiAddWidgetUrl, {
       username,
       widget: {
-        componentName: item.type,
-        settings: [{
-          title: 'Titel',
-          value: item.title,
-          type: 'text',
-          name: 'ComponentTitle'
-        }, {
-          type: 'text',
-          value: 'widget-item--small',
-          title: 'Storlek',
-          name: 'Size'
-        }, {
-          type: 'boolean',
-          value: true,
-          title: 'Synlig',
-          name: 'Visible'
-        }]
+        componentName: type,
+        settings
       }
     }, this.httpOptions)
       .catch(ErrorService.handleError);

@@ -60,11 +60,12 @@ export class WidgetManagerComponent implements OnInit {
     this.widgetManagerService.loadWidgets(this.userName);
   }
 
-  onAddWidget(widget) {
-    this.widgetManagerService.addWidget(this.userName, {
-      type: widget.type,
-      title: widget.title
-    }).subscribe();
+  onAddWidgetEvent(widget) {
+    this.widgetManagerService.addWidget(
+      this.userName,
+      widget.type,
+      this.widgetCollection[widget.type].DefaultSettings
+    ).subscribe(() => this.reloadWidgets());
   }
 
   private getSetting(settings: any, key: string): string {

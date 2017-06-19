@@ -1,4 +1,4 @@
-<widget-add [WidgetList]="availableWidgets"></widget-add>
+<widget-add [WidgetList]="availableWidgets" (onAddWidgetEvent)="onAddWidgetEvent($event)"></widget-add>
 <div class="widget-list">
   <div #componentContainer></div>
 </div>

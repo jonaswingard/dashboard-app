@@ -31,8 +31,8 @@ export class WidgetAddComponent implements OnInit {
     this.showModal = true;
   };
 
-  onSaveWidget(e): void {
-    this.onAddWidgetEvent.emit();
+  onAddWidget(widget: any): void {
+    this.onAddWidgetEvent.emit(widget);
     this.showModal = false;
   };
 }
