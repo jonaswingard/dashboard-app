@@ -68,7 +68,7 @@ export class WidgetManagerComponent implements OnInit {
     ).subscribe(() => this.reloadWidgets());
   }
 
-  private getSetting(settings: any, key: string): string {
+  private getSetting(settings: any, key: string): any {
     return settings && settings.length
       ? settings.filter(setting => setting.name === key)[0].value
       : '';
@@ -85,7 +85,7 @@ export class WidgetManagerComponent implements OnInit {
 
     const widgetSize = this.getSetting(settings, 'Size');
     if (widgetSize) {
-      componentRef.location.nativeElement.classList.add(widgetSize);
+      componentRef.location.nativeElement.classList.add(widgetSize.value);
     }
 
     componentRef.changeDetectorRef.detectChanges();

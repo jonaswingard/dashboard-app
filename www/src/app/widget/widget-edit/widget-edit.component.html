@@ -22,6 +22,11 @@
             <div *ngSwitchCase="'boolean'">
               <lsu-checkbox [(ngModel)]="setting.value" [label]="setting.title" [type]="'checkbox'" [name]="setting.title"></lsu-checkbox>
             </div>
+            <div *ngSwitchCase="'select'" class="ui three column centered grid">
+              <div class="column">
+                <lsu-dropdown [(ngModel)]="setting.value" [data]="setting.data" [textField]="'title'" [placeHolder]="'Välj en storlek'" [name]="setting.title"></lsu-dropdown>
+              </div>
+            </div>
             <div *ngSwitchDefault>
               <div class="ui input">
                 <label>
